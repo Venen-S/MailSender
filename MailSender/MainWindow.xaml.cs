@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Net.Mail;
+using MailSender.Classes;
 
 namespace MailSender
 {
@@ -25,6 +26,9 @@ namespace MailSender
         public MainWindow()
         {
             InitializeComponent();
+            cbSenderSelect.ItemsSource = VariablesClass.Senders;
+            cbSenderSelect.DisplayMemberPath = "Key";
+            cbSenderSelect.SelectedValuePath = "Value";
         }
 
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e) //выход из проги
