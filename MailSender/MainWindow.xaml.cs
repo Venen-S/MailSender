@@ -26,5 +26,25 @@ namespace MailSender
         {
             InitializeComponent();
         }
+
+        private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e) //выход из проги
+        {
+            Close();
+        }
+
+        private void BtnClock_Click(object sender, RoutedEventArgs e) //переход в планировщик
+        {
+            tbConrol.SelectedItem = tbPlanner;
+        }
+
+        private void BtnSend_Click(object sender, RoutedEventArgs e) //планировщик
+        {
+
+        }
+
+        private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас
+        {
+
+        }
     }
 }
