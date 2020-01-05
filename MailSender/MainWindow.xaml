@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
         Title="MailSender" 
@@ -25,6 +27,277 @@
             <MenuItem Header="Сервис" IsEnabled="False"/>
             <MenuItem Header="Помощь" IsEnabled="False"/>
         </Menu>
-        
+       <!--место для табсвитчера-->
+        <TabControl x:Name="tbConrol"
+                    Background="Transparent" 
+                    BorderBrush="#00ACACAC">
+            <TabItem Header="Списки">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#00E5E5E5" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="119*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="368*"/>
+                        <ColumnDefinition Width="494*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="ISender"
+                           Content="Выбрать отправителя" 
+                           Foreground="White" Margin="8,5,0,0" 
+                           Height="30" VerticalAlignment="Top" 
+                           HorizontalAlignment="Left" Width="133" Grid.ColumnSpan="3"/>
+                    <ComboBox x:Name="cbSenderSelect" 
+                              SelectedIndex="0"
+                              Height="30"
+                              Width="212"
+                              ToolTip="Выбрать Email отправителя" 
+                              Foreground="Black" BorderBrush="Transparent"
+                              Margin="31,5,0,0" Background="#00000000" 
+                              HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Column="2">
+                    </ComboBox>
+                    <Button x:Name = "btnAddSender" VerticalAlignment = "Top"
+                            HorizontalAlignment = "Left" 
+                            ToolTip = "Добавить" Margin="248,5,0,0" Background="#00DDDDDD"
+                            BorderBrush="#00707070" Width="35" Height="30" Grid.Column="2">
+                        <fa:ImageAwesome Height="16" Icon="Plus" Foreground="#FF78D77C">
+                        </fa:ImageAwesome>
+                    </Button>
+                    <Button x:Name = "btnEditSender" HorizontalAlignment = "Left"
+                            VerticalAlignment = "Top" Width = "35" Height = "30" 
+                            ToolTip = "Редактировать" Margin="288,5,0,0" Background="#00DDDDDD" 
+                            BorderBrush="#00707070" Grid.Column="2">
+                        <fa:ImageAwesome Height="16" Icon="Pencil" Foreground="#FFEFAC87"></fa:ImageAwesome>
+                    </Button>
+                    <Button x:Name = "btnDeleteSender" HorizontalAlignment = "Left"
+                                VerticalAlignment = "Top" Width = "35" Height = "30" 
+                            ToolTip = "Удалить" Margin="323,40,0,0" 
+                            Background="#00DDDDDD" BorderBrush="#00707070" Grid.Column="2">
+                        <fa:ImageAwesome Height="16" Icon="Remove" Foreground="#FFDC3359" OpacityMask="Black"></fa:ImageAwesome>
+                    </Button>
+                    <Label x:Name = "lSmtp" Content = "Выбрать smtp-сервер"
+                             Width = "133" Foreground="White" Margin="8,40,0,0" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Grid.ColumnSpan="3" />
+                    <ComboBox x:Name = "cbSmtpSelect" 
+                              Height = "30" Margin="31,40,0,0"
+                              VerticalAlignment = "Top" SelectedIndex = "0" 
+                              ToolTip = "Выбрать smtp-сервер" Background="Transparent" 
+                              Foreground="Black" BorderBrush="#00ACACAC" 
+                              HorizontalAlignment="Left" Width="212" FontSize="14" Grid.Column="2">
+                    </ComboBox>
+                    <Button x:Name = "btnAddSmtp" Height = "30" 
+                            ToolTip = "Добавить" Margin="248,40,0,0" 
+                            Background="#00DDDDDD" BorderBrush="#00707070" VerticalAlignment="Top" Grid.Column="2" HorizontalAlignment="Left" Width="35" >
+                        <fa:ImageAwesome Height="16" Icon="Plus" Foreground="#FF78D77C"></fa:ImageAwesome>
+                    </Button>
+                    <Button x:Name = "btnEditSmtp"
+                            ToolTip = "Редактировать" Margin="288,40,0,0" 
+                            Background="#00DDDDDD" BorderBrush="#00707070" 
+                            HorizontalAlignment="Left" Width="35" Height="30" VerticalAlignment="Top" Grid.Column="2" >
+                        <fa:ImageAwesome Height="16" Icon="Pencil" Foreground="#FFEFAC87"></fa:ImageAwesome>
+                    </Button>
+                    <Button x:Name = "btnDeleteSmtp" ToolTip = "Удалить" 
+                            Margin="323,5,0,0" Background="#00DDDDDD" 
+                            BorderBrush="#00707070" HorizontalAlignment="Left" 
+                            Width="35" Height="30" VerticalAlignment="Top" Grid.Column="2" >
+                        <fa:ImageAwesome Height="16" Icon="Remove" Foreground="#FFDC3359"></fa:ImageAwesome>
+                    </Button>
+                    <Label x:Name = "lPlanner" 
+                           Content = "Перейти в планировщик" 
+                           Background="#00000000" Foreground="White" 
+                           Margin="54,5,0,0" HorizontalAlignment="Left" Width="170" Height="30" VerticalAlignment="Top" FontSize="13" Grid.Column="3" />
+                    <Button x:Name = "btnClock" Height = "30"
+                            Click="BtnClock_Click"
+                            ToolTip ="Перейти в планировщик" VerticalAlignment="Top" 
+                            Margin="224,5,0,0" 
+                            Background="#00DDDDDD" BorderBrush="#00707070"
+                            HorizontalAlignment="Left" Width="35" Foreground="#FF686868" Grid.Column="3">
+                        <fa:ImageAwesome Height="16" Icon="Calendar" Foreground="White"></fa:ImageAwesome>
+                    </Button>
+                    <Label x:Name = "lAddressee" Content = "Список адресатов"
+                               Width = "170" Foreground="White" Margin="54,40,0,0" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" FontSize="13" Grid.Column="3" />
+                    <Button x:Name = "btnAddAddressee" 
+                            ToolTip = "Добавить" Margin="224,40,0,0" 
+                            Background="#00DDDDDD" BorderBrush="#00707070" 
+                            HorizontalAlignment="Left" Width="35" Height="30" VerticalAlignment="Top" Grid.Column="3" >
+                        <fa:ImageAwesome Height="16" Icon="Plus" Foreground="#FF78D77C"></fa:ImageAwesome>
+                    </Button>
+                    <Button x:Name = "btnEditAddressee"
+                            Width="35"
+                            ToolTip = "Редактировать" Margin="264,40,0,0" 
+                            BorderBrush="#00707070" Background="#00DDDDDD" 
+                            HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Grid.Column="3">
+                        <fa:ImageAwesome Height="16" Icon="Pencil" Foreground="#FFEFAC87"></fa:ImageAwesome>
+                    </Button>
+                    <Button x:Name = "btnDeleteAddressee"
+                            ToolTip = "Удалить" Margin="304,40,0,0" 
+                            Background="#00A27070" BorderBrush="#00707070" 
+                            HorizontalAlignment="Left" Width="35" Height="30" VerticalAlignment="Top" Grid.Column="3" >
+                        <fa:ImageAwesome Height="16" Icon="Remove" Foreground="#FFDC3359"></fa:ImageAwesome>
+                    </Button>
+                    <GroupBox Header="Получатели писем" Margin="0,75,0,0" 
+                              BorderBrush="#00D5DFE5" Foreground="White" Grid.ColumnSpan="4">
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <GridSplitter Grid.Column="1" HorizontalAlignment="Left"
+                                          Width="3" Background="Transparent"/>
+                            <!--<local:EmailInfoView Grid.Column="0" x:Name="emailInfo"/>
+                            <local:SaveEmailView Grid.Column="1" Margin="10,71,10,122" x:Name="saveEmail"/>-->
+                            <!--<DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
+                                      Background="#00F0F0F0" BorderBrush="#00688CAF"
+                                      x:Name="dgEmails"
+                                      GridLinesVisibility="None"
+                                      OpacityMask="#72FFFFFF" Foreground="Black">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                                    <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto"/>
+                                    <DataGridTextColumn Header="Email" Binding="{Binding Address}" Width="Auto"/>
+                                    <DataGridTextColumn Header="Коментарий" Binding="{Binding Comment}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>-->
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Планировщик" x:Name="tbPlanner">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#00E5E5E5" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock>Дата:</TextBlock>
+                    <Calendar SelectionMode="MultipleRange"
+                                  Margin="10,10,0,0"
+                                  x:Name="cldSchedulDateTimes" HorizontalAlignment="Left" Width="192" Height="175" VerticalAlignment="Top">
+                        <Calendar.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                                <GradientStop Color="#FFECF0F4" Offset="0.16"/>
+                                <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
+                                <GradientStop Offset="1"/>
+                            </LinearGradientBrush>
+                        </Calendar.Background>
+                    </Calendar>
+                    <TextBlock Margin="13,192,0,0"
+                                       x:Name="tbTimePicker" Foreground="White" Height="23" HorizontalAlignment="Left" Width="63" FontSize="14" VerticalAlignment="Top"><Run Text="Время:"/></TextBlock>
+                    <DockPanel 
+                                   Margin="81,193,0,0"
+                                   Background="#00000000" Height="22" HorizontalAlignment="Left" Width="121" VerticalAlignment="Top">
+                        <TextBox Text="00:00:00" TextAlignment="Center" Width="60" Background="Transparent" BorderBrush="#00ABADB3" Foreground="White" SelectionBrush="#000078D7"/>
+                        <xctk:TimePicker x:Name="TimePicker" Background="Transparent" 
+                                             Margin="0,0,0,0"
+                                             BorderBrush="#00ABADB3" Foreground="Transparent" Width="36"/>
+                    </DockPanel>
+                    <StackPanel Margin="10,220,0,0" Width="178" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top">
+                        <Button Margin="0,3" Padding="0,5"
+                                    x:Name="btnSend" Foreground="White" BorderBrush="#00707070" Background="#00DDDDDD"
+                                Click="BtnSend_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Запланировать"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="0,3" Padding="0,5"
+                                Click="BtnSendAtOnce_Click"
+                                    x:Name="btnSendAtOnce" Foreground="#00000000" BorderBrush="#00707070" Background="#00DDDDDD">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Отправить" Foreground="White"/>
+                                <fa:ImageAwesome Height="16" Icon="Send" Margin="6,0,0,0" Foreground="#FF048BFE"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <GroupBox Header="Задания" Margin="207,0,0,0" BorderBrush="#00D5DFE5" Foreground="White" HorizontalAlignment="Left" Width="771">
+                        <ListBox Background="Transparent" Margin="0,0,-2,0">
+                            <ListBoxItem HorizontalAlignment="Stretch" Width="757">
+                                <GroupBox Header="Задание 1" Foreground="White" Width="747">
+                                    <StackPanel>
+                                        <TextBlock Text="Время" Foreground="White"/>
+                                        <TextBlock Text="Сервер" Foreground="White"/>
+                                        <TextBlock Text="Отправитель" Foreground="White"/>
+                                        <TextBlock Text="Получатели" Foreground="White"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                            <ListBoxItem HorizontalAlignment="Stretch" Width="757">
+                                <GroupBox Header="Задание 2" Foreground="White" Width="747">
+                                    <StackPanel>
+                                        <TextBlock Text="Время" Foreground="White"/>
+                                        <TextBlock Text="Сервер" Foreground="White"/>
+                                        <TextBlock Text="Отправитель" Foreground="White"/>
+                                        <TextBlock Text="Получатели" Foreground="White"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                            <ListBoxItem HorizontalAlignment="Stretch" Width="757">
+                                <GroupBox Header="Задание 3" Foreground="White" Width="747">
+                                    <StackPanel>
+                                        <TextBlock Text="Время" Foreground="White"/>
+                                        <TextBlock Text="Сервер" Foreground="White"/>
+                                        <TextBlock Text="Отправитель" Foreground="White"/>
+                                        <TextBlock Text="Получатели" Foreground="White"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                            <ListBoxItem HorizontalAlignment="Stretch" Width="757">
+                                <GroupBox Header="Задание 4" Foreground="White" Width="747">
+                                    <StackPanel>
+                                        <TextBlock Text="Время" Foreground="White"/>
+                                        <TextBlock Text="Сервер" Foreground="White"/>
+                                        <TextBlock Text="Отправитель" Foreground="White"/>
+                                        <TextBlock Text="Получатели" Foreground="White"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                            <ListBoxItem HorizontalAlignment="Stretch" Width="757">
+                                <GroupBox Header="Задание 5" Foreground="White" Width="747">
+                                    <StackPanel>
+                                        <TextBlock Text="Время" Foreground="White"/>
+                                        <TextBlock Text="Сервер" Foreground="White"/>
+                                        <TextBlock Text="Отправитель" Foreground="White"/>
+                                        <TextBlock Text="Получатели" Foreground="White"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                        </ListBox>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Письма">
+                <Grid>
+                    <GroupBox Header="Тема письма" DockPanel.Dock="Top" 
+                              Foreground="White" BorderBrush="#00000000" 
+                              Margin="10,0" Height="44" 
+                              VerticalAlignment="Top">
+                        <TextBox Text="" Foreground="White" 
+                                 SelectionBrush="White" 
+                                 Background="#007C1111" 
+                                 x:Name="SubjectPost"
+                                 BorderBrush="White" Margin="0,0,0,1" CaretBrush="White"/>
+                    </GroupBox>
+                    <GroupBox Header="Текст письма" 
+                              DockPanel.Dock="Top" Background="#00BD4B4B" 
+                              BorderBrush="#00528FB4" 
+                              Foreground="White" Margin="10,49,10,0">
+                        <TextBox AcceptsReturn="True" Text=""
+                                 x:Name="BodyPost" 
+                                 Background="Transparent" 
+                                 BorderBrush="White" 
+                                 Foreground="White" SelectionBrush="White" CaretBrush="White"/>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
