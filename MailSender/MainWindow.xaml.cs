@@ -95,5 +95,17 @@ namespace MailSender
                 strBody, strSubject, smtpServ, sPort);
             emailSender.SendMails((IQueryable<Recipients>)dgEmails.ItemsSource);
         }
+
+        private void TabSwitcher_Back(object sender, RoutedEventArgs e)
+        {
+            if (tbConrol.SelectedIndex == 0) return;
+            tbConrol.SelectedIndex--;
+        }
+
+        private void TabSwitcher_Forward(object sender, RoutedEventArgs e)
+        {
+            if (tbConrol.SelectedIndex == tbConrol.Items.Count - 1) return;
+            tbConrol.SelectedIndex++;
+        }
     }
 }

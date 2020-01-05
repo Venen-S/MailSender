@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:local="clr-namespace:MailSender"
+        xmlns:local="clr-namespace:MailSender.View"
         mc:Ignorable="d"
         Title="MailSender" 
         Height="600" 
@@ -27,7 +27,9 @@
             <MenuItem Header="Сервис" IsEnabled="False"/>
             <MenuItem Header="Помощь" IsEnabled="False"/>
         </Menu>
-       <!--место для табсвитчера-->
+        <local:TabSwitcher Back="TabSwitcher_Back"
+                           Forward="TabSwitcher_Forward"
+                           DockPanel.Dock="Bottom"/>
         <TabControl x:Name="tbConrol"
                     Background="Transparent" 
                     BorderBrush="#00ACACAC">
