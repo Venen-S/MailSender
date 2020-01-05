@@ -85,7 +85,6 @@
     </Compile>
     <Compile Include="Classes\DBClass.cs" />
     <Compile Include="Classes\EmailSendServiceClass.cs" />
-    <Compile Include="Classes\PasswordClass.cs" />
     <Compile Include="Classes\Recipient.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\usors.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodePasswordDLL\CodePasswordDLL.csproj">
+      <Project>{d2b8c21f-3ad7-4210-ac90-074fc22814da}</Project>
+      <Name>CodePasswordDLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

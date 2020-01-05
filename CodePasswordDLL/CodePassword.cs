@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MailSender.Classes
+namespace CodePasswordDLL
 {
-    /// <summary>
-    /// На вход подаем зашифрованный пароль, на выходе получаем пароль для email
-    /// </summary>
-    public static class PasswordClass
+    public static class CodePassword
     {
         public static string getPassword(string p_sPassw)
         {
