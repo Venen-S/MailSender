@@ -91,6 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Recipient.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\SchedulerClass.cs" />
     <Compile Include="Classes\VariablesClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

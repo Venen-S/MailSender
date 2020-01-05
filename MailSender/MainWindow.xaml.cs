@@ -48,7 +48,24 @@ namespace MailSender
 
         private void BtnSend_Click(object sender, RoutedEventArgs e) //планировщик
         {
-
+            SchedulerClass sc = new SchedulerClass();
+            TimeSpan tsSendTime = sc.GetSendTime(tbTimePicker.Text);
+            if(tsSendTime==new TimeSpan())
+            {
+                MessageBox.Show("Некорректный формат даты");
+                return;
+            }
+            DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate 
+                ?? DateTime.Today).Add(tsSendTime);
+            if(dtSendDateTime<DateTime.Now)
+            {
+                MessageBox.Show("Дата и время не могут быть раньше, чем настоящее время");
+                return;
+            }
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text,
+                cbSenderSelect.SelectedValue.ToString(), BodyPost.Text, SubjectPost.Text, cbSmtpSelect.Text,
+                int.Parse(((KeyValuePair<string, int>)cbSenderSelect.SelectedItem).Value.ToString()));
+            sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Recipients>)dgEmails.ItemsSource);
         }
 
         private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас
