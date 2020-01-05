@@ -19,4 +19,18 @@ namespace MailSender.Classes
             { "sok74@yandex.ru" , PasswordClass.getPassword (";liq34tjk") }
         };
     }
+
+    public static class VariablesSmtp //SMTP сервера
+    {
+        public static Dictionary<string, int> Smtpserv
+        {
+            get { return dicServers; }
+        }
+        private static Dictionary<string, int> dicServers = new Dictionary<string, int>()
+        {
+            {"smtp.mail.ru", 25 },
+            {"smtp.yandex.ru", 25 },
+            {"smtp.gmail.com", 25 }
+        };
+    }
 }

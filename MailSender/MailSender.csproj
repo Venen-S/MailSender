@@ -84,6 +84,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\DBClass.cs" />
+    <Compile Include="Classes\EmailSendServiceClass.cs" />
     <Compile Include="Classes\PasswordClass.cs" />
     <Compile Include="Classes\Recipient.designer.cs">
       <AutoGen>True</AutoGen>
