@@ -29,6 +29,8 @@ namespace MailSender
             cbSenderSelect.ItemsSource = VariablesClass.Senders;
             cbSenderSelect.DisplayMemberPath = "Key";
             cbSenderSelect.SelectedValuePath = "Value";
+            DBClass db = new DBClass();
+            dgEmails.ItemsSource = db.Emails;
         }
 
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e) //выход из проги
