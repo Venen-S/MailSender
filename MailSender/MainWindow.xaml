@@ -149,9 +149,9 @@
                             </Grid.ColumnDefinitions>
                             <GridSplitter Grid.Column="1" HorizontalAlignment="Left"
                                           Width="3" Background="Transparent"/>
-                            <!--<local:EmailInfoView Grid.Column="0" x:Name="emailInfo"/>
-                            <local:SaveEmailView Grid.Column="1" Margin="10,71,10,122" x:Name="saveEmail"/>-->
-                            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
+                            <local:EmailInfoView Grid.Column="0" x:Name="emailInfo"/>
+                            <local:SaveEmailView Grid.Column="1" Margin="10,71,10,122" x:Name="saveEmail"/>
+                            <!--<DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
                                       Background="#00F0F0F0" BorderBrush="#00688CAF"
                                       x:Name="dgEmails"
                                       GridLinesVisibility="None"
@@ -162,7 +162,7 @@
                                     <DataGridTextColumn Header="Email" Binding="{Binding Address}" Width="Auto"/>
                                     <DataGridTextColumn Header="Коментарий" Binding="{Binding Comment}" Width="*"/>
                                 </DataGrid.Columns>
-                            </DataGrid>
+                            </DataGrid>-->
                         </Grid>
                     </GroupBox>
                 </Grid>

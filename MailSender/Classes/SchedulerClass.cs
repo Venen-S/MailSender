@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace MailSender.Classes
         DispatcherTimer timer = new DispatcherTimer(); //таймер
         EmailSendServiceClass emailSender;             //экземпл. кл. отвечающего за отправку
         DateTime dtSend;                               //дата и время отправки
-        IQueryable<Recipients> emails;                 //коллекция адресов
+        ObservableCollection<Recipients> emails;       //коллекция адресов
 
         /// <summary>
         /// Метод, который превращает строку из текстбокса tbTimePicker в TimeSpan
@@ -43,7 +43,7 @@ namespace MailSender.Classes
         /// <param name="emailSender"></param>
         /// <param name="emails"></param>
         public void SendEmails(DateTime dtSend,EmailSendServiceClass emailSender,
-            IQueryable<Recipients> emails)
+            ObservableCollection<Recipients> emails)
         {
             this.emailSender = emailSender;
             this.dtSend = dtSend;

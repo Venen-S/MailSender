@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Mail;
 using MailSender.Classes;
+using MailSender.ViewModel;
 
 namespace MailSender
 {
@@ -32,8 +34,8 @@ namespace MailSender
             cbSmtpSelect.ItemsSource = VariablesSmtp.Smtpserv;
             cbSmtpSelect.DisplayMemberPath = "Key";
             cbSmtpSelect.SelectedValue = "Value";
-            DBClass db = new DBClass();
-            dgEmails.ItemsSource = db.Emails;
+            //DBClass db = new DBClass();
+            //dgEmails.ItemsSource = db.Emails;
         }
 
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e) //выход из проги
@@ -65,7 +67,9 @@ namespace MailSender
             EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text,
                 cbSenderSelect.SelectedValue.ToString(), BodyPost.Text, SubjectPost.Text, cbSmtpSelect.Text,
                 int.Parse(((KeyValuePair<string, int>)cbSenderSelect.SelectedItem).Value.ToString()));
-            sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Recipients>)dgEmails.ItemsSource);
+            var locator = (ViewModelLocator)FindResource("Locator");
+            emailSender.SendMails(locator.Main.Recipients);
+            
         }
 
         private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас
@@ -93,7 +97,8 @@ namespace MailSender
             }
             EmailSendServiceClass emailSender=new EmailSendServiceClass(strLogin, strPassword,
                 strBody, strSubject, smtpServ, sPort);
-            emailSender.SendMails((IQueryable<Recipients>)dgEmails.ItemsSource);
+            var locator = (ViewModelLocator)FindResource("Locator");
+            emailSender.SendMails(locator.Main.Recipients);
         }
 
         private void TabSwitcher_Back(object sender, RoutedEventArgs e)

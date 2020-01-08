@@ -11,6 +11,7 @@ namespace MailSender.Services
     public interface IDataAccessService //определяет доступ к данным БД
     {
         ObservableCollection<Recipients> GetEmails();
+        int CreateEmail(Recipients recipients);
     }
 
     public class DataAccessService:IDataAccessService
@@ -30,6 +31,13 @@ namespace MailSender.Services
                 recipients.Add(item);
             }
             return recipients;
+        }
+
+        public int CreateEmail(Recipients recipients)
+        {
+            context.Recipients.InsertOnSubmit(recipients);
+            context.SubmitChanges();
+            return recipients.Id;
         }
     }
 }

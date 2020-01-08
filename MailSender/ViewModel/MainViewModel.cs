@@ -32,13 +32,38 @@ namespace MailSender.ViewModel
             }
         }
 
+        //Передача данных из View в ViewModel с записью в БД (см. класс DataAccessService)
+        Recipients _RecipienstInfo;
+        public Recipients RecipientsInfo
+        {
+            get { return _RecipienstInfo; }
+            set
+            {
+                _RecipienstInfo = value;
+                RaisePropertyChanged(nameof(RecipientsInfo));
+            }
+        }
+
+        //Сохранение адреса
+        void SaveEmail(Recipients recipients)
+        {
+            RecipientsInfo.Id = _serviceProxy.CreateEmail(recipients);
+            if(RecipientsInfo.Id!=0)
+            {
+                Recipients.Add(RecipientsInfo);
+                RaisePropertyChanged(nameof(RecipientsInfo));
+            }
+        }
+
         public RelayCommand ReadAllCommand { get; set; }
+        public RelayCommand<Recipients> SaveCommand { get; set; }
 
         public MainViewModel(IDataAccessService servProxy)
         {
             _serviceProxy = servProxy;
             Recipients = new ObservableCollection<Recipients>();
             ReadAllCommand = new RelayCommand(GetEmails);
+            SaveCommand = new RelayCommand<Recipients>(SaveEmail);
         }
     }
 }

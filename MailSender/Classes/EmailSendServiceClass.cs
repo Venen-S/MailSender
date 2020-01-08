@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +55,7 @@ namespace MailSender.Classes
             }
         }
 
-        public void SendMails(IQueryable<Recipients> emails) //проходим по БД и вызываем SendMail
+        public void SendMails(ObservableCollection<Recipients> emails) //проходим по БД и вызываем SendMail
         {
             foreach (Recipients email in emails)
             {

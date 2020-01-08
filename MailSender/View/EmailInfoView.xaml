@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="MailSender.View.EmailInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:MailSender.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ReadAllCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <DockPanel>
+        <DockPanel Background="#008F7F7F">
+            <DockPanel DockPanel.Dock="Top" Margin="5,0,5,3">
+                <TextBlock Margin="0,0,3,0" Foreground="White">Фильтр имени:</TextBlock>
+                <TextBox Background="Transparent" BorderBrush="#00ABADB3" 
+                         Foreground="White"
+                         Text="{Binding FilterName, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                         SelectionBrush="#FFFDFDFD" OpacityMask="White"/>
+            </DockPanel>
+            <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0,5" Padding="30,5"
+                Command="{Binding ReadAllCommand}" x:Name="btnloadallemails"
+                Content="Обновить" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White"/>
+
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
+                      Background="#00F0F0F0" BorderBrush="#00688CAF"
+                      GridLinesVisibility="None"
+                      x:Name="dgEmails"
+                      ItemsSource="{Binding EmailsView}"
+                      OpacityMask="#72FFFFFF" Foreground="Black">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="30"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Address}" Width="200"/>
+                    <DataGridTextColumn Header="Коментарий" Binding="{Binding Comment}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </DockPanel>
+</UserControl>
