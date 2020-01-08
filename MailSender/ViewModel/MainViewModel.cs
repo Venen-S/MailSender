@@ -9,6 +9,7 @@ namespace MailSender.ViewModel
     
     public class MainViewModel : ViewModelBase
     {
+        //логика чтени€ данных о получател€х почты из таблицы
         ObservableCollection<Recipients> _Recipients;
         public ObservableCollection<Recipients> Recipients
         {
@@ -21,6 +22,7 @@ namespace MailSender.ViewModel
         }
 
         IDataAccessService _serviceProxy;
+        //тут данные читаютс€ из Ѕƒ и помещаютс€ в наблюдаемую коллекцию
         void GetEmails()
         {
             Recipients.Clear();

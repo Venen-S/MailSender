@@ -8,7 +8,7 @@ using MailSender.Classes;
 
 namespace MailSender.Services
 {
-    public interface IDataAccessService
+    public interface IDataAccessService //определяет доступ к данным БД
     {
         ObservableCollection<Recipients> GetEmails();
     }
