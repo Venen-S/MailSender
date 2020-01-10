@@ -51,9 +51,9 @@
                 <Binding Path="EmailInfo.Id" Mode="TwoWay"
                          ValidatesOnExceptions="True" ValidatesOnDataErrors="True"
                          NotifyOnValidationError="True">
-                    <!--<Binding.ValidationRules>
-                        <v:DemoValidation/>
-                    </Binding.ValidationRules>-->
+                    <Binding.ValidationRules>
+                        <v:DataValidation/>
+                    </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
