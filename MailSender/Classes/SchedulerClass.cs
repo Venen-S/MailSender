@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,9 @@ namespace MailSender.Classes
     /// напоминает о событиях
     /// Также помогает автоматизировать рассылку писем в соответствии с расписанием
     /// </summary>
-    class SchedulerClass
+    public class SchedulerClass
     {
+
         DispatcherTimer timer = new DispatcherTimer(); //таймер
         EmailSendServiceClass emailSender;             //экземпл. кл. отвечающего за отправку
         DateTime dtSend;                               //дата и время отправки
@@ -39,9 +41,6 @@ namespace MailSender.Classes
         /// <summary>
         //// Непосредственно отправка писем
         /// </summary>
-        /// <param name="dtSend"></param>
-        /// <param name="emailSender"></param>
-        /// <param name="emails"></param>
         public void SendEmails(DateTime dtSend,EmailSendServiceClass emailSender,
             ObservableCollection<Recipients> emails)
         {
@@ -53,13 +52,43 @@ namespace MailSender.Classes
             timer.Start();
         }
 
+        //private void Timer_Tick(object sender, EventArgs e)
+        //{
+        //    if(dicDates.Count==0)
+        //    {
+        //        timer.Stop();
+        //        MessageBox.Show("Письма отправлены");
+        //    }
+        //    else if(dicDates.Keys.First<DateTime>().ToShortTimeString()==DateTime.Now.ToShortTimeString())
+        //    {
+        //        emailSender.strBody = dicDates[dicDates.Keys.First<DateTime>()];
+        //        emailSender.strSubject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()}";
+        //    }
+        //}
+
+
+        //рабочий метод закоментен для тестов
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if(dtSend.ToShortTimeString()==DateTime.Now.ToShortTimeString())
+            if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
             {
                 emailSender.SendMails(emails);
                 timer.Stop();
                 MessageBox.Show("Письма отправлены");
+            }
+        }
+
+
+        //тупо для unit теста, черт ногу сломит, какая та магия
+        Dictionary<DateTime, string> dicDates = new Dictionary<DateTime, string>();
+        public Dictionary<DateTime,string> DatesEmailTexts
+        {
+            get { return dicDates; }
+            set
+            {
+                dicDates = value;
+                dicDates = dicDates.OrderBy(pair => pair.Key).ToDictionary(pair =>
+                    pair.Key, pair => pair.Value);
             }
         }
     }
