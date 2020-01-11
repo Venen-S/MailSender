@@ -9,7 +9,7 @@ namespace MailSender.Classes
     /// <summary>
     /// Класс отвечает за работу БД
     /// </summary>
-    public class DBClass
+    class DBClass
     {
         private RecipientDataContext emails = new RecipientDataContext();
         public IQueryable<Recipients> Emails

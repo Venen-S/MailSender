@@ -12,6 +12,7 @@ namespace MailSender.Services
     {
         ObservableCollection<Recipients> GetEmails();
         int CreateEmail(Recipients recipients);
+        int DeleteEmail(Recipients recipients);
     }
 
     public class DataAccessService:IDataAccessService
@@ -25,7 +26,8 @@ namespace MailSender.Services
 
         public ObservableCollection<Recipients> GetEmails()
         {
-            ObservableCollection<Recipients> recipients = new ObservableCollection<Recipients>();
+            ObservableCollection<Recipients> recipients = 
+                new ObservableCollection<Recipients>();
             foreach(var item in context.Recipients)
             {
                 recipients.Add(item);
@@ -38,6 +40,11 @@ namespace MailSender.Services
             context.Recipients.InsertOnSubmit(recipients);
             context.SubmitChanges();
             return recipients.Id;
+        }
+
+        public int DeleteEmail(Recipients recipients)
+        {
+            throw new NotImplementedException();
         }
     }
 }

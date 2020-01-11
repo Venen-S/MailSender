@@ -16,7 +16,6 @@ namespace MailSender.Classes
             System.Globalization.CultureInfo cultureInfo)
         {
             int IntValue = 0;
-            ValidationResult result = null;
             try
             {
                 IntValue = Convert.ToInt32(value);

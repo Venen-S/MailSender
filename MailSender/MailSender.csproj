@@ -99,8 +99,14 @@
     <Compile Include="View\EmailInfoView.xaml.cs">
       <DependentUpon>EmailInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ErorrWindow.xaml.cs">
+      <DependentUpon>ErorrWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SaveEmailView.xaml.cs">
       <DependentUpon>SaveEmailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SendEndWindow.xaml.cs">
+      <DependentUpon>SendEndWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TabSwitcher.xaml.cs">
       <DependentUpon>TabSwitcher.xaml</DependentUpon>
@@ -130,7 +136,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ErorrWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SaveEmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SendEndWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

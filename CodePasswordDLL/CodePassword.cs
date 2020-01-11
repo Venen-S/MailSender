@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace CodePasswordDLL
 {
-    public static class CodePassword
+    public class CodePassword
     {
+        /// <summary>
+        /// На вход подаем зашифрованный пароль, на выходе получаем пароль для email
+        /// </summary>
         public static string getPassword(string p_sPassw)
         {
             string password = "";

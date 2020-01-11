@@ -39,7 +39,7 @@ namespace MailSender.Classes
         }
 
         /// <summary>
-        //// Непосредственно отправка писем
+        /// Непосредственно отправка писем
         /// </summary>
         public void SendEmails(DateTime dtSend,EmailSendServiceClass emailSender,
             ObservableCollection<Recipients> emails)
@@ -67,7 +67,6 @@ namespace MailSender.Classes
         //}
 
 
-        //рабочий метод закоментен для тестов
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
