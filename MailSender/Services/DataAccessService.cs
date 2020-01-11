@@ -44,7 +44,9 @@ namespace MailSender.Services
 
         public int DeleteEmail(Recipients recipients)
         {
-            throw new NotImplementedException();
+            context.Recipients.DeleteOnSubmit(recipients);
+            context.SubmitChanges();
+            return recipients.Id;
         }
     }
 }
