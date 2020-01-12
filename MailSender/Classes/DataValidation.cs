@@ -10,7 +10,7 @@ namespace MailSender.Classes
     /// <summary>
     /// Класс для проверки что ID получателя больше 0
     /// </summary>
-    public class DataValidation:ValidationRule
+    public class DemoValidation:ValidationRule
     {
         public override ValidationResult Validate(object value,
             System.Globalization.CultureInfo cultureInfo)

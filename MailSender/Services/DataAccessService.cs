@@ -4,48 +4,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using MailSender.Classes;
+using Common;
+using System.Windows;
 
 namespace MailSender.Services
 {
     public interface IDataAccessService //определяет доступ к данным БД
     {
-        ObservableCollection<Recipients> GetEmails();
-        int CreateEmail(Recipients recipients);
-        int DeleteEmail(Recipients recipients);
+        ObservableCollection<Recipient> GetEmails();
+        int CreateEmail(Recipient recipients);
+        int DeleteEmail(Recipient recipients);
     }
 
     public class DataAccessService:IDataAccessService
     {
-        RecipientDataContext context;
+        RecipientModelContainer context;
 
         public DataAccessService()
         {
-            context = new RecipientDataContext();
+            context = new RecipientModelContainer();
         }
 
-        public ObservableCollection<Recipients> GetEmails()
+        public ObservableCollection<Recipient> GetEmails()
         {
-            ObservableCollection<Recipients> recipients = 
-                new ObservableCollection<Recipients>();
+            ObservableCollection<Recipient> Recipients = 
+                new ObservableCollection<Recipient>();
             foreach(var item in context.Recipients)
             {
-                recipients.Add(item);
+                Recipients.Add(item);
             }
-            return recipients;
+            return Recipients;
         }
 
-        public int CreateEmail(Recipients recipients)
+        public int CreateEmail(Recipient recipients)
         {
-            context.Recipients.InsertOnSubmit(recipients);
-            context.SubmitChanges();
+            context.Recipients.Add(recipients);
+            context.SaveChanges();
             return recipients.Id;
         }
 
-        public int DeleteEmail(Recipients recipients)
+        public int DeleteEmail(Recipient recipients)
         {
-            context.Recipients.DeleteOnSubmit(recipients);
-            context.SubmitChanges();
+            context.Recipients.Remove(recipients);
+            context.SaveChanges();
             return recipients.Id;
         }
     }

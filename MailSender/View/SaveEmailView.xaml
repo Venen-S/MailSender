@@ -52,7 +52,7 @@
                          ValidatesOnExceptions="True" ValidatesOnDataErrors="True"
                          NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <v:DataValidation/>
+                        <v:DemoValidation/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

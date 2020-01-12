@@ -18,8 +18,8 @@ namespace MailSender.Classes
         private string strPassword; // пароль к email
         private string strSmtp;     // smtp сервер
         private int iSmtpPort;      // порт smtp сервера
-        private string strBody;      // текст письма
-        private string strSubject;   // тема письма
+        public string strBody;      // текст письма
+        public string strSubject;   // тема письма
         #endregion
 
         //конструктор класса
@@ -80,36 +80,36 @@ namespace MailSender.Classes
             }
         }
 
-        public void SendMails(ObservableCollection<Recipients> emails) //проходим по БД и вызываем SendMail
+        public void SendMails(ObservableCollection<Common.Recipient> emails) //проходим по БД и вызываем SendMail
         {
-            foreach (Recipients email in emails)
+            foreach (Common.Recipient email in emails)
             {
                 SendMail(email.Address, email.Name);
             }
         }
 
         //далее идут асинхронные и паралельные методы SendMails
-        public void SendMailsParallel(ObservableCollection<Recipients> emails)
+        public void SendMailsParallel(ObservableCollection<Common.Recipient> emails)
         {
-            foreach (Recipients email in emails)
+            foreach (Common.Recipient email in emails)
             {
                 ThreadPool.QueueUserWorkItem(_ => SendMails(emails));
             }
         }
 
-        public async Task SendParallelAsync(ObservableCollection<Recipients> emails)
+        public async Task SendParallelAsync(ObservableCollection<Common.Recipient> emails)
         {
             var send_task = new List<Task>();
-            foreach (Recipients email in emails)
+            foreach (Common.Recipient email in emails)
             {
                 send_task.Add(SendMailAsync(email.Address, email.Name));
             }
             await Task.WhenAll(send_task).ConfigureAwait(false);
         }
 
-        public async Task SendMailsAsync(ObservableCollection<Recipients> emails)
+        public async Task SendMailsAsync(ObservableCollection<Common.Recipient> emails)
         {
-            foreach (Recipients email in emails)
+            foreach (Common.Recipient email in emails)
             {
                 await SendMailAsync(email.Address, email.Name).ConfigureAwait(false);
             }

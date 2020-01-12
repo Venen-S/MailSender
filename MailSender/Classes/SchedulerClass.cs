@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MailSender.Classes
         DispatcherTimer timer = new DispatcherTimer(); //таймер
         EmailSendServiceClass emailSender;             //экземпл. кл. отвечающего за отправку
         DateTime dtSend;                               //дата и время отправки
-        ObservableCollection<Recipients> emails;       //коллекция адресов
+        ObservableCollection<Common.Recipient> emails;       //коллекция адресов
 
         /// <summary>
         /// Метод, который превращает строку из текстбокса tbTimePicker в TimeSpan
@@ -41,8 +42,8 @@ namespace MailSender.Classes
         /// <summary>
         /// Непосредственно отправка писем
         /// </summary>
-        public void SendEmails(DateTime dtSend,EmailSendServiceClass emailSender,
-            ObservableCollection<Recipients> emails)
+        public void SendEmails(EmailSendServiceClass emailSender,
+            ObservableCollection<Common.Recipient> emails)
         {
             this.emailSender = emailSender;
             this.dtSend = dtSend;
@@ -52,30 +53,32 @@ namespace MailSender.Classes
             timer.Start();
         }
 
-        //private void Timer_Tick(object sender, EventArgs e)
-        //{
-        //    if(dicDates.Count==0)
-        //    {
-        //        timer.Stop();
-        //        MessageBox.Show("Письма отправлены");
-        //    }
-        //    else if(dicDates.Keys.First<DateTime>().ToShortTimeString()==DateTime.Now.ToShortTimeString())
-        //    {
-        //        emailSender.strBody = dicDates[dicDates.Keys.First<DateTime>()];
-        //        emailSender.strSubject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()}";
-        //    }
-        //}
-
-
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
+            if (dicDates.Count == 0)
             {
-                emailSender.SendMails(emails);
                 timer.Stop();
                 MessageBox.Show("Письма отправлены");
             }
+            else if (dicDates.Keys.First<DateTime>().ToShortTimeString() == DateTime.Now.ToShortTimeString())
+            {
+                emailSender.strBody = dicDates[dicDates.Keys.First<DateTime>()];
+                emailSender.strSubject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()}";
+                emailSender.SendMails(emails);
+                dicDates.Remove(dicDates.Keys.First<DateTime>());
+            }
         }
+
+
+        //private void Timer_Tick(object sender, EventArgs e)
+        //{
+        //    if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
+        //    {
+        //        emailSender.SendMails(emails);
+        //        timer.Stop();
+        //        MessageBox.Show("Письма отправлены");
+        //    }
+        //}
 
 
         //тупо для unit теста, черт ногу сломит, какая та магия

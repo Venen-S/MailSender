@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodePasswordDLL.Tests", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSenderTests", "MailSenderTests\MailSenderTests.csproj", "{4BD40825-0974-4393-9FFF-C2D356D676A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{02C40758-03CE-4BAD-9652-371B008F0C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4BD40825-0974-4393-9FFF-C2D356D676A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BD40825-0974-4393-9FFF-C2D356D676A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BD40825-0974-4393-9FFF-C2D356D676A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C40758-03CE-4BAD-9652-371B008F0C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C40758-03CE-4BAD-9652-371B008F0C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C40758-03CE-4BAD-9652-371B008F0C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C40758-03CE-4BAD-9652-371B008F0C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

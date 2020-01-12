@@ -66,7 +66,7 @@ namespace MailSender
                 cbSenderSelect.SelectedValue.ToString(), BodyPost.Text, SubjectPost.Text, cbSmtpSelect.Text,
                 int.Parse(((KeyValuePair<string, int>)cbSenderSelect.SelectedItem).Value.ToString()));
             var locator = (ViewModelLocator)FindResource("Locator");
-            emailSender.SendMails(locator.Main.Recipients);
+            sc.SendEmails(emailSender, locator.Main.Emails);
             
         }
 
@@ -96,7 +96,7 @@ namespace MailSender
             EmailSendServiceClass emailSender=new EmailSendServiceClass(strLogin, strPassword,
                 strBody, strSubject, smtpServ, sPort);
             var locator = (ViewModelLocator)FindResource("Locator");
-            emailSender.SendMails(locator.Main.Recipients);
+            emailSender.SendMails(locator.Main.Emails);
         }
 
         private void TabSwitcher_Back(object sender, RoutedEventArgs e)
