@@ -60,7 +60,6 @@ namespace MailSender.ViewModel
 
         public void SaveEmail(Recipient email)
         {
-            //EmailInfo.Id = _serviceProxy.UpdateEmail(email);
             EmailInfo.Id = _serviceProxy.CreateEmail(email);
             if (EmailInfo.Id != 0)
             {
@@ -71,11 +70,11 @@ namespace MailSender.ViewModel
 
         public void DeleteEmail(Recipient email)
         {
-            EmailInfo.Id = _serviceProxy.DeleteEmail(email);
             if (EmailInfo.Id != 0)
             {
+                _serviceProxy.DeleteEmail(EmailInfo.Id);
                 Emails.Remove(EmailInfo);
-                RaisePropertyChanged(nameof(EmailInfo));
+                RaisePropertyChanged(nameof(EmailsView));
             }
         }
 

@@ -24,5 +24,6 @@ namespace MailSender.View
         {
             InitializeComponent();
         }
+
     }
 }

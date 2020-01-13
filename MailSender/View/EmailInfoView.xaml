@@ -30,6 +30,7 @@
                       Background="#00F0F0F0" BorderBrush="#00688CAF"
                       GridLinesVisibility="None"
                       x:Name="dgEmails"
+                      SelectedItem="{Binding SelectedItemEmailInfo}"
                       ItemsSource="{Binding EmailsView}"
                       OpacityMask="#72FFFFFF" Foreground="Black">
                 <DataGrid.Columns>

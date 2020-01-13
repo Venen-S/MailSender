@@ -13,7 +13,7 @@ namespace MailSender.Services
     {
         ObservableCollection<Recipient> GetEmails();
         int CreateEmail(Recipient recipients);
-        int DeleteEmail(Recipient recipients);
+        void DeleteEmail(int id);
     }
 
     public class DataAccessService:IDataAccessService
@@ -43,11 +43,19 @@ namespace MailSender.Services
             return recipients.Id;
         }
 
-        public int DeleteEmail(Recipient recipients)
+        public void DeleteEmail(int id)
         {
-            context.Recipients.Remove(recipients);
+            Recipient g = context.Recipients.Find(id);
+            try
+            {
+                context.Recipients.Remove(g);
+            }
+            catch(ArgumentNullException)
+            {
+                MessageBox.Show("Удаление возможно только по существующем Id в базе.\n");
+                return;
+            }
             context.SaveChanges();
-            return recipients.Id;
         }
     }
 }
