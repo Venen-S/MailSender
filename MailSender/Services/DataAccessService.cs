@@ -41,7 +41,7 @@ namespace MailSender.Services
         /// <summary>
         /// метод создания нового получателя
         /// </summary>
-        /// <param name="recipients"></param>
+        /// <param name="recipients">имя, комент, адрес получателя</param>
         /// <returns></returns>
         public int CreateEmail(Recipient recipients)
         {
