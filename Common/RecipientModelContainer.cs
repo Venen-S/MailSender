@@ -9,6 +9,7 @@ namespace Common
 {
     public partial class RecipientModelContainer:DbContext
     {
+        //это для БД под EF, EF делал вручную
         public RecipientModelContainer() : base("MailSenderDB") { }
         public virtual DbSet<Recipient> Recipients { get; set; }
     }

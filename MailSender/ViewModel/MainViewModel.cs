@@ -11,6 +11,7 @@ namespace MailSender.ViewModel
 
     public class MainViewModel : ViewModelBase
     {
+        //коллекци€ получателей + фичи дл€ фильта имен
         ObservableCollection<Recipient> _Emails;
         public ObservableCollection<Recipient> Emails
         {
@@ -24,6 +25,7 @@ namespace MailSender.ViewModel
             }
         }
 
+        //метод фильтра имен
         private void OnEmailsCollectionViewSourceFilter(object sender, FilterEventArgs e)
         {
             if (!(e.Item is Recipient email) || string.IsNullOrWhiteSpace(filtName)) return;
@@ -31,6 +33,7 @@ namespace MailSender.ViewModel
                 e.Accepted = false;
         }
 
+        //экземпл€р класса DataAccessService
         IDataAccessService _serviceProxy;
         private void GetEmails() => Emails = _serviceProxy.GetEmails();
 
@@ -59,6 +62,7 @@ namespace MailSender.ViewModel
             }
         }
 
+        //метод сохранени€ получател€
         public void SaveEmail(Recipient email)
         {
             EmailInfo.Id = _serviceProxy.CreateEmail(email);
@@ -69,6 +73,7 @@ namespace MailSender.ViewModel
             }
         }
 
+        //метод удалени€ получател€
         public void DeleteEmail(Recipient email)
         {
             if (EmailInfo.Id != 0)
@@ -79,6 +84,7 @@ namespace MailSender.ViewModel
             }
         }
 
+        //метод редактировани€ получател€
         public void EditEmail(Recipient email)
         {
             if (EmailInfo.Id!=0)
@@ -93,6 +99,7 @@ namespace MailSender.ViewModel
         public RelayCommand<Recipient> DeleteCommand { get; set; }
         public RelayCommand<Recipient> EditCommand { get; set; }
 
+        //эта ерунда дл€ поиска по фильтру
         private string filtName;
         public string FilterName
         {
@@ -103,6 +110,10 @@ namespace MailSender.ViewModel
                 EmailsView.Refresh();
             }
         }
+
+        //не спрашивай мен€ что это, € сам не знаю, пусть будет магией, но
+        //это крайне важна€ вещь дл€ EmailsView, даже не знаю что будет если удалить
+        //поэтому просто не трогай, пусть будет, не мешает же
         private CollectionViewSource _emailView;
         public ICollectionView EmailsView => _emailView?.View;
     }

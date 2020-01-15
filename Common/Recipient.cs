@@ -8,6 +8,7 @@ namespace Common
 {
     public partial class Recipient
     {
+        //это для БД под EF
         public int Id { get; set; }
         public string Address { get; set; }
         public string Name { get; set; }
