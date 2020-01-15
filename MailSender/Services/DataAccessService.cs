@@ -14,7 +14,7 @@ namespace MailSender.Services
         ObservableCollection<Recipient> GetEmails();
         int CreateEmail(Recipient recipients);
         void DeleteEmail(int id);
-        int EditEmail(Recipient recipients, int id);
+        void EditEmail(Recipient recipients, int id);
     }
 
     public class DataAccessService:IDataAccessService
@@ -37,6 +37,12 @@ namespace MailSender.Services
             return Recipients;
         }
 
+
+        /// <summary>
+        /// метод создания нового получателя
+        /// </summary>
+        /// <param name="recipients"></param>
+        /// <returns></returns>
         public int CreateEmail(Recipient recipients)
         {
             context.Recipients.Add(recipients);
@@ -44,6 +50,10 @@ namespace MailSender.Services
             return recipients.Id;
         }
 
+        /// <summary>
+        /// метод удаления получателя
+        /// </summary>
+        /// <param name="id">id получателя которого надо грохнуть</param>
         public void DeleteEmail(int id)
         {
             Recipient delete = context.Recipients.Find(id);
@@ -59,14 +69,34 @@ namespace MailSender.Services
             context.SaveChanges();
         }
 
-        public int EditEmail(Recipient recipients, int id)
+        /// <summary>
+        /// метод редактирования получателя
+        /// </summary>
+        /// <param name="recipients">передаем данные получателя</param>
+        /// <param name="id">номер id который потом удалим</param>
+        /// <returns></returns>
+        public void EditEmail(Recipient recipients, int id)
         {
-            context.Recipients.Add(recipients);
-            context.SaveChanges();
-            Recipient delete = context.Recipients.Find(id);
-            context.Recipients.Remove(delete);
-            context.SaveChanges();
-            return recipients.Id;
+            //тут редактируем получателя.
+            //впринципе этот код рабочий, но что то мне подсказывает
+            //что копирование кода не лучшая мысль, а так же возможно это
+            //говнокод, поэтому это будет закоментино, а код который на
+            //мой взгляд будет лучше будет ниже.
+
+            //context.Recipients.Add(recipients);
+            //context.SaveChanges();
+            //Recipient delete = context.Recipients.Find(id);
+            //context.Recipients.Remove(delete);
+            //context.SaveChanges();
+            //return recipients.Id;
+
+            //а вот и норм код, велосипедов и костылей не придумывал,
+            //просто вызвал методы которые и так работают
+            //по сути тоже самое что и код выше в коментах, но
+            //красивее на вид xD
+            var email = recipients;
+            CreateEmail(email);
+            DeleteEmail(id);
         }
     }
 }
