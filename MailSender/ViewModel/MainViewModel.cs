@@ -45,6 +45,7 @@ namespace MailSender.ViewModel
             ReadAllCommand = new RelayCommand(GetEmails);
             SaveCommand = new RelayCommand<Recipient>(SaveEmail);
             DeleteCommand = new RelayCommand<Recipient>(DeleteEmail);
+            EditCommand = new RelayCommand<Recipient>(EditEmail);
         }
 
         Recipient _EmailInfo;
@@ -78,9 +79,19 @@ namespace MailSender.ViewModel
             }
         }
 
+        public void EditEmail(Recipient email)
+        {
+            if (EmailInfo.Id!=0)
+            {
+                _serviceProxy.EditEmail(email, EmailInfo.Id);
+                RaisePropertyChanged(nameof(EmailsView));
+            }
+        }
+
 
         public RelayCommand<Recipient> SaveCommand { get; set; }
         public RelayCommand<Recipient> DeleteCommand { get; set; }
+        public RelayCommand<Recipient> EditCommand { get; set; }
 
         private string filtName;
         public string FilterName

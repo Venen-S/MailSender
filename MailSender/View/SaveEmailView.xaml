@@ -82,5 +82,10 @@
                     Command="{Binding DeleteCommand}"
                     Content="Удалить"
                     Background="#00B91F1F" Foreground="White" BorderBrush="#00BF0505" Grid.Column="1" Grid.Row="7"/>
+        <Button Grid.Column="1" Margin="45,42,51,103" Grid.Row="7"
+                CommandParameter="{Binding EmailInfo}"
+                Command="{Binding EditCommand}"
+                Content="Редактировать"
+                Background="#00B91F1F" Foreground="White" BorderBrush="#00BF0505"/>
     </Grid>
 </UserControl>

@@ -14,6 +14,7 @@ namespace MailSender.Services
         ObservableCollection<Recipient> GetEmails();
         int CreateEmail(Recipient recipients);
         void DeleteEmail(int id);
+        int EditEmail(Recipient recipients, int id);
     }
 
     public class DataAccessService:IDataAccessService
@@ -45,10 +46,10 @@ namespace MailSender.Services
 
         public void DeleteEmail(int id)
         {
-            Recipient g = context.Recipients.Find(id);
+            Recipient delete = context.Recipients.Find(id);
             try
             {
-                context.Recipients.Remove(g);
+                context.Recipients.Remove(delete);
             }
             catch(ArgumentNullException)
             {
@@ -56,6 +57,16 @@ namespace MailSender.Services
                 return;
             }
             context.SaveChanges();
+        }
+
+        public int EditEmail(Recipient recipients, int id)
+        {
+            context.Recipients.Add(recipients);
+            context.SaveChanges();
+            Recipient delete = context.Recipients.Find(id);
+            context.Recipients.Remove(delete);
+            context.SaveChanges();
+            return recipients.Id;
         }
     }
 }
