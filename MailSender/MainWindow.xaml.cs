@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using System.Net;
 using System.Net.Mail;
-using MailSender.Classes;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 using MailSender.ViewModel;
+using MailSender.Classes;
 
 namespace MailSender
 {
@@ -72,12 +61,12 @@ namespace MailSender
 
         private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас
         {
-            string strBody = BodyPost.Text;
-            string strSubject = SubjectPost.Text;
-            string strLogin = cbSenderSelect.Text;
-            string strPassword = cbSenderSelect.SelectedValue.ToString();
-            string smtpServ = cbSmtpSelect.Text;
-            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());
+            string strBody = BodyPost.Text;//тело письма
+            string strSubject = SubjectPost.Text;//тема письма
+            string strLogin = cbSenderSelect.Text;//логин
+            string strPassword = cbSenderSelect.SelectedValue.ToString();//пароль
+            string smtpServ = cbSmtpSelect.Text;//смтп сервер
+            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
             if(string.IsNullOrEmpty(strLogin))
             {
                 MessageBox.Show("Выберите отправителя");

@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using System.Windows;
+using System.Collections.ObjectModel;
 using System.Threading;
-using System.Collections.Generic;
 
 namespace MailSender.Classes
 {
@@ -39,7 +39,7 @@ namespace MailSender.Classes
             using (MailMessage mm = new MailMessage(strLogin, mail))
             {
                 mm.Subject = strSubject;
-                mm.Body = strBody + "/nПисьмо от " + DateTime.Now;
+                mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
                 mm.IsBodyHtml = false;
                 SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
                 sc.EnableSsl = true;
@@ -49,9 +49,13 @@ namespace MailSender.Classes
                 try
                 {
                     sc.Send(mm);
+                    View.SendEndWindow sendEnd = new View.SendEndWindow();
+                    sendEnd.ShowDialog();
                 }
                 catch (Exception ex)
                 {
+                    View.ErorrWindow erorrWindow = new View.ErorrWindow();
+                    erorrWindow.ShowDialog();
                     MessageBox.Show("Невозможно отправить письмо " + ex.ToString());
                 }
             }
