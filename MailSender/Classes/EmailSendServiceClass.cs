@@ -34,10 +34,14 @@ namespace MailSender.Classes
             strSmtp = sSmtp;
         }
 
-        private void SendMail(string mail, string name)//отправка email конкретном адресатам
+        private (bool,string) SendMail(string mail, string name, ref bool flag, ref string except)
+            //отправка email адресатам
+            //передаем имя, мыло, флаг и строку для ошибки
         {
+            
             using (MailMessage mm = new MailMessage(strLogin, mail))
             {
+                (bool, string) cort=(false,string.Empty);
                 mm.Subject = strSubject;
                 mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
                 mm.IsBodyHtml = false;
@@ -49,15 +53,38 @@ namespace MailSender.Classes
                 try
                 {
                     sc.Send(mm);
-                    View.SendEndWindow sendEnd = new View.SendEndWindow();
-                    sendEnd.ShowDialog();
+                    flag = true; //если все норм флаг истина 
+                    return cort; //возвращаем кортеж с флагом и пустой строкой
                 }
                 catch (Exception ex)
                 {
-                    View.ErorrWindow erorrWindow = new View.ErorrWindow();
-                    erorrWindow.ShowDialog();
-                    MessageBox.Show("Невозможно отправить письмо " + ex.ToString());
+                    flag = false; 
+                    except = ex.ToString();//присваимваем строке для кортежа запись ошибки
+                    return cort;//возвращаем флаг с ошибкой в кортеже в SendMails
                 }
+            }
+        }
+
+        public void SendMails(ObservableCollection<Common.Recipient> emails) //проходим по БД и вызываем SendMail
+        {
+            bool flag=true; //ставлю дефолт истина т.к. априори прога должна отработать без проблем
+            string except = string.Empty;
+            foreach (Common.Recipient email in emails)
+            {
+                SendMail(email.Address, email.Name,ref flag, ref except);//адрес и нэйм для отправки писем, 
+                //флаг и строку для проверки как отработано
+            }
+
+            if (flag == true)//если все норм единожды выскочит окно что все гуд
+            {
+                View.SendEndWindow sendEnd = new View.SendEndWindow();
+                sendEnd.ShowDialog();
+            }
+            else if (flag == false)//если не норм то обложит матами, но единожды xD
+            {
+                View.ErorrWindow erorrWindow = new View.ErorrWindow();
+                erorrWindow.ShowDialog();
+                MessageBox.Show(except.ToString());
             }
         }
 
@@ -84,13 +111,7 @@ namespace MailSender.Classes
             }
         }
 
-        public void SendMails(ObservableCollection<Common.Recipient> emails) //проходим по БД и вызываем SendMail
-        {
-            foreach (Common.Recipient email in emails)
-            {
-                SendMail(email.Address, email.Name);
-            }
-        }
+        
 
         //далее идут асинхронные и паралельные методы SendMails
         public void SendMailsParallel(ObservableCollection<Common.Recipient> emails)
@@ -118,5 +139,7 @@ namespace MailSender.Classes
                 await SendMailAsync(email.Address, email.Name).ConfigureAwait(false);
             }
         }
+
+
     }
 }

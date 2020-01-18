@@ -66,8 +66,8 @@ namespace MailSender.ViewModel
         public void SaveEmail(Recipient email)
         {
             //проверка на дублирование, без нее будет создавать дубликаты
-            if (EmailInfo!=EmailInfo)
-            {
+            //if (EmailInfo!=EmailInfo)
+            //{
                 EmailInfo.Id = _serviceProxy.CreateEmail(email);
                 //проверка от "дурака" чтобы не было попыток создать получателя с id 0
                 if (EmailInfo.Id != 0)
@@ -75,7 +75,7 @@ namespace MailSender.ViewModel
                     Emails.Add(EmailInfo);
                     RaisePropertyChanged(nameof(EmailInfo));
                 }
-            }
+            //}
         }
 
         //метод удаления получателя
