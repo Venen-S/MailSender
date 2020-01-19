@@ -11,8 +11,52 @@ namespace MailSender.ViewModel
 
     public class MainViewModel : ViewModelBase
     {
-        //коллекци€ получателей + фичи дл€ фильта имен
+
+        Recipient _EmailInfo;
+        IDataAccessService _serviceProxy;
         ObservableCollection<Recipient> _Emails;
+        private CollectionViewSource _emailView;
+
+        public RelayCommand ReadAllCommand { get; set; }
+        public RelayCommand<Recipient> SaveCommand { get; set; }
+        public RelayCommand<Recipient> DeleteCommand { get; set; }
+        public RelayCommand<Recipient> EditCommand { get; set; }
+
+        public MainViewModel(IDataAccessService servProxy)
+        {
+            _serviceProxy = servProxy;
+            Emails = new ObservableCollection<Recipient>();
+            EmailInfo = new Recipient();
+
+            ReadAllCommand = new RelayCommand(GetEmails);
+            SaveCommand = new RelayCommand<Recipient>(SaveEmail);
+            DeleteCommand = new RelayCommand<Recipient>(DeleteEmail);
+            EditCommand = new RelayCommand<Recipient>(EditEmail);
+        }
+
+        //эта ерунда дл€ поиска по фильтру
+        private string filtName;
+        public string FilterName
+        {
+            get => filtName;
+            set
+            {
+                if (!Set(ref filtName, value)) return;
+                EmailsView.Refresh();
+            }
+        }
+
+        public Recipient EmailInfo
+        {
+            get { return _EmailInfo; }
+            set
+            {
+                _EmailInfo = value;
+                RaisePropertyChanged(nameof(EmailInfo));
+            }
+        }
+
+        //коллекци€ получателей + фичи дл€ фильта имен
         public ObservableCollection<Recipient> Emails
         {
             get { return _Emails; }
@@ -33,34 +77,7 @@ namespace MailSender.ViewModel
                 e.Accepted = false;
         }
 
-        //экземпл€р класса DataAccessService
-        IDataAccessService _serviceProxy;
         private void GetEmails() => Emails = _serviceProxy.GetEmails();
-
-        public RelayCommand ReadAllCommand { get; set; }
-
-        public MainViewModel(IDataAccessService servProxy)
-        {
-            _serviceProxy = servProxy;
-            Emails = new ObservableCollection<Recipient>();
-            EmailInfo = new Recipient();
-
-            ReadAllCommand = new RelayCommand(GetEmails);
-            SaveCommand = new RelayCommand<Recipient>(SaveEmail);
-            DeleteCommand = new RelayCommand<Recipient>(DeleteEmail);
-            EditCommand = new RelayCommand<Recipient>(EditEmail);
-        }
-
-        Recipient _EmailInfo;
-        public Recipient EmailInfo
-        {
-            get { return _EmailInfo; }
-            set
-            {
-                _EmailInfo = value;
-                RaisePropertyChanged(nameof(EmailInfo));
-            }
-        }
 
         //метод сохранени€ получател€
         public void SaveEmail(Recipient email)
@@ -99,27 +116,9 @@ namespace MailSender.ViewModel
             }
         }
 
-
-        public RelayCommand<Recipient> SaveCommand { get; set; }
-        public RelayCommand<Recipient> DeleteCommand { get; set; }
-        public RelayCommand<Recipient> EditCommand { get; set; }
-
-        //эта ерунда дл€ поиска по фильтру
-        private string filtName;
-        public string FilterName
-        {
-            get => filtName;
-            set
-            {
-                if (!Set(ref filtName, value)) return;
-                EmailsView.Refresh();
-            }
-        }
-
         //не спрашивай мен€ что это, € сам не знаю, пусть будет магией, но
         //это крайне важна€ вещь дл€ EmailsView, даже не знаю что будет если удалить
         //поэтому просто не трогай, пусть будет, не мешает же
-        private CollectionViewSource _emailView;
         public ICollectionView EmailsView => _emailView?.View;
     }
 }
