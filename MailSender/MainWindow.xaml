@@ -198,10 +198,19 @@
                     <DockPanel 
                                    Margin="81,193,0,0"
                                    Background="#00000000" Height="22" HorizontalAlignment="Left" Width="121" VerticalAlignment="Top">
-                        <TextBox Text="00:00:00" TextAlignment="Center" Width="60" Background="Transparent" BorderBrush="#00ABADB3" Foreground="White" SelectionBrush="#000078D7"/>
-                        <xctk:TimePicker x:Name="TimePicker" Background="Transparent" 
-                                             Margin="0,0,0,0"
-                                             BorderBrush="#00ABADB3" Foreground="Transparent" Width="36"/>
+                        <TextBox Text="12:00:00" 
+                                 TextAlignment="Center" 
+                                 Width="60" 
+                                 x:Name="TimePicker"
+                                 Background="Transparent" 
+                                 BorderBrush="#00ABADB3" 
+                                 Foreground="White" 
+                                 SelectionBrush="#000078D7"/>
+                        <xctk:TimePicker  
+                                         Background="Transparent" 
+                                         Margin="0,0,0,0"
+                                         BorderBrush="#00ABADB3" 
+                                         Foreground="Transparent" Width="36"/>
                     </DockPanel>
                     <StackPanel Margin="10,220,0,0" Width="178" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top">
                         <Button Margin="0,3" Padding="0,5"

@@ -36,6 +36,7 @@ namespace MailSender.Classes
                 tsSendTime = TimeSpan.Parse(strSendTime);
             }
             catch { }
+            dtSend = DateTime.Parse(tsSendTime.ToString());
             return tsSendTime;
         }
 
@@ -46,52 +47,51 @@ namespace MailSender.Classes
             ObservableCollection<Common.Recipient> emails)
         {
             this.emailSender = emailSender;
-            this.dtSend = dtSend;
             this.emails = emails;
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (dicDates.Count == 0)
-            {
-                timer.Stop();
-                MessageBox.Show("Письма отправлены");
-            }
-            else if (dicDates.Keys.First<DateTime>().ToShortTimeString() == DateTime.Now.ToShortTimeString())
-            {
-                emailSender.strBody = dicDates[dicDates.Keys.First<DateTime>()];
-                emailSender.strSubject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()}";
-                emailSender.SendMails(emails);
-                dicDates.Remove(dicDates.Keys.First<DateTime>());
-            }
-        }
-
-
         //private void Timer_Tick(object sender, EventArgs e)
         //{
-        //    if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
+        //    if (dicDates.Count == 0)
         //    {
-        //        emailSender.SendMails(emails);
         //        timer.Stop();
         //        MessageBox.Show("Письма отправлены");
+        //    }
+        //    else if (dicDates.Keys.First<DateTime>().ToShortTimeString() == DateTime.Now.ToShortTimeString())
+        //    {
+        //        emailSender.strBody = dicDates[dicDates.Keys.First<DateTime>()];
+        //        emailSender.strSubject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()}";
+        //        emailSender.SendMails(emails);
+        //        dicDates.Remove(dicDates.Keys.First<DateTime>());
         //    }
         //}
 
 
-        //тупо для unit теста, черт ногу сломит, какая та магия
-        Dictionary<DateTime, string> dicDates = new Dictionary<DateTime, string>();
-        public Dictionary<DateTime,string> DatesEmailTexts
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            get { return dicDates; }
-            set
+            if (dtSend.ToString() == DateTime.Now.ToString())
             {
-                dicDates = value;
-                dicDates = dicDates.OrderBy(pair => pair.Key).ToDictionary(pair =>
-                    pair.Key, pair => pair.Value);
+                emailSender.SendMails(emails);
+                timer.Stop();
+                MessageBox.Show("Письма отправлены");
             }
         }
+
+
+        //тупо для unit теста, черт ногу сломит, какая та магия
+        //Dictionary<DateTime, string> dicDates = new Dictionary<DateTime, string>();
+        //public Dictionary<DateTime,string> DatesEmailTexts
+        //{
+        //    get { return dicDates; }
+        //    set
+        //    {
+        //        dicDates = value;
+        //        dicDates = dicDates.OrderBy(pair => pair.Key).ToDictionary(pair =>
+        //            pair.Key, pair => pair.Value);
+        //    }
+        //}
     }
 }

@@ -48,8 +48,14 @@ namespace MailSender
 
         private void BtnSend_Click(object sender, RoutedEventArgs e) //планировщик
         {
+            string strBody = BodyPost.Text;//тело письма
+            string strSubject = SubjectPost.Text;//тема письма
+            string strLogin = cbSenderSelect.Text;//логин
+            string strPassword = cbSenderSelect.SelectedValue.ToString();//пароль
+            string smtpServ = cbSmtpSelect.Text;//смтп сервер
+            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
             SchedulerClass sc = new SchedulerClass();
-            TimeSpan tsSendTime = sc.GetSendTime(tbTimePicker.Text);
+            TimeSpan tsSendTime = sc.GetSendTime(TimePicker.Text);
             if(tsSendTime==new TimeSpan())
             {
                 MessageBox.Show("Некорректный формат даты");
@@ -62,9 +68,8 @@ namespace MailSender
                 MessageBox.Show("Дата и время не могут быть раньше, чем настоящее время");
                 return;
             }
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text,
-                cbSenderSelect.SelectedValue.ToString(), BodyPost.Text, SubjectPost.Text, cbSmtpSelect.Text,
-                int.Parse(((KeyValuePair<string, int>)cbSenderSelect.SelectedItem).Value.ToString()));
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword,
+                strBody, strSubject, smtpServ, sPort);
             var locator = (ViewModelLocator)FindResource("Locator");
             sc.SendEmails(emailSender, locator.Main.Emails);
             
