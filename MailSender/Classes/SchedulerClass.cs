@@ -21,7 +21,7 @@ namespace MailSender.Classes
         DispatcherTimer timer = new DispatcherTimer(); //таймер
         EmailSendServiceClass emailSender;             //экземпл. кл. отвечающего за отправку
         DateTime dtSend;                               //дата и время отправки
-        ObservableCollection<Common.Recipient> emails;       //коллекция адресов
+        ObservableCollection<Common.Recipient> emails; //коллекция адресов
 
         /// <summary>
         /// Метод, который превращает строку из текстбокса tbTimePicker в TimeSpan
@@ -52,23 +52,6 @@ namespace MailSender.Classes
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
         }
-
-        //private void Timer_Tick(object sender, EventArgs e)
-        //{
-        //    if (dicDates.Count == 0)
-        //    {
-        //        timer.Stop();
-        //        MessageBox.Show("Письма отправлены");
-        //    }
-        //    else if (dicDates.Keys.First<DateTime>().ToShortTimeString() == DateTime.Now.ToShortTimeString())
-        //    {
-        //        emailSender.strBody = dicDates[dicDates.Keys.First<DateTime>()];
-        //        emailSender.strSubject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()}";
-        //        emailSender.SendMails(emails);
-        //        dicDates.Remove(dicDates.Keys.First<DateTime>());
-        //    }
-        //}
-
 
         private void Timer_Tick(object sender, EventArgs e)
         {
