@@ -82,17 +82,15 @@ namespace MailSender.ViewModel
         //метод сохранения получателя
         public void SaveEmail(Recipient email)
         {
-            //проверка на дублирование, без нее будет создавать дубликаты
-            //if (EmailInfo!=EmailInfo)
-            //{
-                EmailInfo.Id = _serviceProxy.CreateEmail(email);
-                //проверка от "дурака" чтобы не было попыток создать получателя с id 0
-                if (EmailInfo.Id != 0)
-                {
-                    Emails.Add(EmailInfo);
-                    RaisePropertyChanged(nameof(EmailInfo));
-                }
-            //}
+
+            EmailInfo.Id = _serviceProxy.CreateEmail(email);
+            //проверка от "дурака" чтобы не было попыток создать получателя с id 0
+            if (EmailInfo.Id != 0)
+            {
+                GetEmails();
+                RaisePropertyChanged(nameof(EmailInfo));
+            }
+
         }
 
         //метод удаления получателя
@@ -101,7 +99,7 @@ namespace MailSender.ViewModel
             if (EmailInfo.Id != 0)
             {
                 _serviceProxy.DeleteEmail(EmailInfo.Id);
-                Emails.Remove(EmailInfo);
+                GetEmails();
                 RaisePropertyChanged(nameof(EmailsView));
             }
         }
@@ -112,6 +110,7 @@ namespace MailSender.ViewModel
             if (EmailInfo.Id!=0)
             {
                 _serviceProxy.EditEmail(email, EmailInfo.Id);
+                GetEmails();
                 RaisePropertyChanged(nameof(EmailsView));
             }
         }
