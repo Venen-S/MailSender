@@ -311,13 +311,36 @@
                     <GroupBox Header="Текст письма" 
                               DockPanel.Dock="Top" Background="#00BD4B4B" 
                               BorderBrush="#00528FB4" 
-                              Foreground="White" Margin="10,49,10,0">
+                              Foreground="White" Margin="10,49,10,57">
                         <TextBox AcceptsReturn="True" Text=""
                                  x:Name="BodyPost" 
                                  Background="Transparent" 
                                  BorderBrush="White" 
                                  Foreground="White" SelectionBrush="White" CaretBrush="White"/>
                     </GroupBox>
+                    <GroupBox Header="Прикрепить файл" 
+                              Margin="10,436,10,0" 
+                              Background="#00000000" 
+                              BorderBrush="#00D5DFE5" 
+                              Foreground="White">
+                        <TextBox Text="..."
+                                 x:Name="tbAttachFileWay"
+                                 Margin="106,0,152,0" 
+                                 Background="Transparent" 
+                                 BorderBrush="#00ABADB3" 
+                                 Foreground="White">
+                        </TextBox>
+                    </GroupBox>
+                    <Button MouseDoubleClick="FileAttach_MouseDoubleClick"
+                                Foreground="#00000000" 
+                                BorderBrush="#00707070" 
+                                Background="#00DDDDDD" 
+                                Margin="841,450,17,5">
+                        <TextBlock Text="Добавить файл" 
+                                       Foreground="White" 
+                                       Width="84" 
+                                       Height="20"/>
+                    </Button>
                 </Grid>
             </TabItem>
         </TabControl>

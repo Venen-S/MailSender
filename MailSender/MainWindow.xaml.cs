@@ -17,6 +17,8 @@ using System.Net;
 using System.Net.Mail;
 using MailSender.Classes;
 using MailSender.ViewModel;
+using Microsoft.Win32;
+using System.IO;
 
 namespace MailSender
 {
@@ -48,6 +50,7 @@ namespace MailSender
 
         private void BtnSend_Click(object sender, RoutedEventArgs e) //планировщик
         {
+            string strAttachFile = tbAttachFileWay.Text; //файл для отправки
             string strBody = BodyPost.Text;//тело письма
             string strSubject = SubjectPost.Text;//тема письма
             string strLogin = cbSenderSelect.Text;//логин
@@ -69,7 +72,7 @@ namespace MailSender
                 return;
             }
             EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword,
-                strBody, strSubject, smtpServ, sPort);
+                strBody, strSubject, smtpServ, sPort, strAttachFile);
             var locator = (ViewModelLocator)FindResource("Locator");
             sc.SendEmails(emailSender, locator.Main.Emails);
             
@@ -77,6 +80,7 @@ namespace MailSender
 
         private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас
         {
+            string strAttachFile = tbAttachFileWay.Text; //файл для отправки
             string strBody = BodyPost.Text;//тело письма
             string strSubject = SubjectPost.Text;//тема письма
             string strLogin = cbSenderSelect.Text;//логин
@@ -99,7 +103,7 @@ namespace MailSender
                 return;
             }
             EmailSendServiceClass emailSender=new EmailSendServiceClass(strLogin, strPassword,
-                strBody, strSubject, smtpServ, sPort);
+                strBody, strSubject, smtpServ, sPort, strAttachFile);
             var locator = (ViewModelLocator)FindResource("Locator");
             emailSender.SendMails(locator.Main.Emails);
         }
@@ -114,6 +118,23 @@ namespace MailSender
         {
             if (tbConrol.SelectedIndex == tbConrol.Items.Count - 1) return;
             tbConrol.SelectedIndex++;
+        }
+
+        private void FileAttach_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.ShowDialog();
+            FileInfo fileInfo = new FileInfo(ofd.FileName.ToString());
+            if(fileInfo.Length> 105000000)
+            {
+                MessageBox.Show("Файл слишком большой. выберите файл не превышающий 100МБ");
+                ofd = null;
+                return;
+            }
+            else
+            {
+                tbAttachFileWay.Text = ofd.FileName.ToString();
+            }
         }
     }
 }

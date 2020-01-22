@@ -18,13 +18,14 @@ namespace MailSender.Classes
         private string strPassword; // пароль к email
         private string strSmtp;     // smtp сервер
         private int iSmtpPort;      // порт smtp сервера
-        public string strBody;      // текст письма
-        public string strSubject;   // тема письма
+        private string strBody;      // текст письма
+        private string strSubject;   // тема письма
+        private string strAttachFile; //путь до файла
         #endregion
 
         //конструктор класса
         public EmailSendServiceClass(string sLogin, string sPassword, string sBody, string sSubject,
-            string sSmtp, int sPort)
+            string sSmtp, int sPort, string sAttachFile)
         {
             strLogin = sLogin;
             strPassword = sPassword;
@@ -32,6 +33,7 @@ namespace MailSender.Classes
             strSubject = sSubject;
             iSmtpPort = sPort;
             strSmtp = sSmtp;
+            strAttachFile = sAttachFile;
         }
 
         private (bool,string) SendMail(string mail, string name, ref bool flag, ref string except)
@@ -45,6 +47,7 @@ namespace MailSender.Classes
                 mm.Subject = strSubject;
                 mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
                 mm.IsBodyHtml = false;
+                mm.Attachments.Add(new Attachment(strAttachFile));
                 SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
                 sc.EnableSsl = true;
                 sc.DeliveryMethod = SmtpDeliveryMethod.Network;
