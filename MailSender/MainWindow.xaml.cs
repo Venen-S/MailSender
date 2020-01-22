@@ -56,7 +56,7 @@ namespace MailSender
             int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
             SchedulerClass sc = new SchedulerClass();
             TimeSpan tsSendTime = sc.GetSendTime(TimePicker.Text);
-            if(tsSendTime==new TimeSpan())
+            if (tsSendTime==new TimeSpan())
             {
                 MessageBox.Show("Некорректный формат даты");
                 return;

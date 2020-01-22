@@ -194,23 +194,34 @@
                         </Calendar.Background>
                     </Calendar>
                     <TextBlock Margin="13,192,0,0"
-                                       x:Name="tbTimePicker" Foreground="White" Height="23" HorizontalAlignment="Left" Width="63" FontSize="14" VerticalAlignment="Top"><Run Text="Время:"/></TextBlock>
-                    <DockPanel 
-                                   Margin="81,193,0,0"
-                                   Background="#00000000" Height="22" HorizontalAlignment="Left" Width="121" VerticalAlignment="Top">
-                        <TextBox Text="12:00:00" 
+                               x:Name="tbTimePicker" 
+                               Foreground="White" 
+                               Height="23" 
+                               HorizontalAlignment="Left" 
+                               Width="63" 
+                               FontSize="14" 
+                               VerticalAlignment="Top">
+                        <Run Text="Время:"/></TextBlock>
+                    <DockPanel Margin="76,190,0,0"
+                               Background="#00000000" 
+                               Height="25" 
+                               HorizontalAlignment="Left" 
+                               Width="112" 
+                               VerticalAlignment="Top">
+                        <!--<TextBox Text="12:00:00" 
                                  TextAlignment="Center" 
                                  Width="60" 
                                  x:Name="TimePicker"
                                  Background="Transparent" 
                                  BorderBrush="#00ABADB3" 
                                  Foreground="White" 
-                                 SelectionBrush="#000078D7"/>
+                                 SelectionBrush="#FF0078D7"/>-->
                         <xctk:TimePicker  
-                                         Background="Transparent" 
-                                         Margin="0,0,0,0"
-                                         BorderBrush="#00ABADB3" 
-                                         Foreground="Transparent" Width="36"/>
+                                 x:Name="TimePicker"
+                                 Background="Transparent" 
+                                 Margin="0,0,0,0"
+                                 BorderBrush="#00ABADB3" 
+                                 Foreground="White" Width="90"/>
                     </DockPanel>
                     <StackPanel Margin="10,220,0,0" Width="178" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top">
                         <Button Margin="0,3" Padding="0,5"
