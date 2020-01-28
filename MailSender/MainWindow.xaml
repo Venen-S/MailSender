@@ -167,7 +167,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Планировщик" x:Name="tbPlanner">
+            <TabItem Header="Отправка" x:Name="tbPlanner">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -228,19 +228,19 @@
                                     x:Name="btnSend" Foreground="White" BorderBrush="#00707070" Background="#00DDDDDD"
                                 Click="BtnSend_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Запланировать"/>
+                                <TextBlock Text="Запланировать для всех" Width="140"/>
                             </StackPanel>
                         </Button>
                         <Button Margin="0,3" Padding="0,5"
                                 Click="BtnSendAtOnce_Click"
                                     x:Name="btnSendAtOnce" Foreground="#00000000" BorderBrush="#00707070" Background="#00DDDDDD">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Отправить" Foreground="White"/>
+                                <TextBlock Text="Отправить всем" Foreground="White"/>
                                 <fa:ImageAwesome Height="16" Icon="Send" Margin="6,0,0,0" Foreground="#FF048BFE"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <GroupBox Header="Задания" Margin="207,0,0,0" BorderBrush="#00D5DFE5" Foreground="White" HorizontalAlignment="Left" Width="771">
+                    <!--<GroupBox Header="Задания" Margin="207,0,0,0" BorderBrush="#00D5DFE5" Foreground="White" HorizontalAlignment="Left" Width="771">
                         <ListBox Background="Transparent" Margin="0,0,-2,0">
                             <ListBoxItem HorizontalAlignment="Stretch" Width="757">
                                 <GroupBox Header="Задание 1" Foreground="White" Width="747">
@@ -293,14 +293,10 @@
                                 </GroupBox>
                             </ListBoxItem>
                         </ListBox>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Письма">
-                <Grid>
+                    </GroupBox>-->
                     <GroupBox Header="Тема письма" DockPanel.Dock="Top" 
                               Foreground="White" BorderBrush="#00000000" 
-                              Margin="10,0" Height="44" 
+                              Margin="207,0,10,0" Height="44" 
                               VerticalAlignment="Top">
                         <TextBox Text="" Foreground="White" 
                                  SelectionBrush="White" 
@@ -311,7 +307,7 @@
                     <GroupBox Header="Текст письма" 
                               DockPanel.Dock="Top" Background="#00BD4B4B" 
                               BorderBrush="#00528FB4" 
-                              Foreground="White" Margin="10,49,10,57">
+                              Foreground="White" Margin="207,49,10,57">
                         <TextBox AcceptsReturn="True" Text=""
                                  x:Name="BodyPost" 
                                  Background="Transparent" 
@@ -319,7 +315,7 @@
                                  Foreground="White" SelectionBrush="White" CaretBrush="White"/>
                     </GroupBox>
                     <GroupBox Header="Прикрепить файл" 
-                              Margin="10,436,10,0" 
+                              Margin="207,436,10,0" 
                               Background="#00000000" 
                               BorderBrush="#00D5DFE5" 
                               Foreground="White">
@@ -343,6 +339,7 @@
                     </Button>
                 </Grid>
             </TabItem>
+            
         </TabControl>
     </DockPanel>
 </Window>
