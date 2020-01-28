@@ -94,45 +94,5 @@ namespace MailSender.Classes
             }
         }
 
-
-        private Task SendMail(string mail, string name)
-        {
-            return Task.Run(() =>
-            {
-
-                using (MailMessage mm = new MailMessage(strLogin, mail))
-                {
-                    (bool, string) cort = (false, string.Empty);
-                    mm.Subject = strSubject;
-                    mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
-                    mm.IsBodyHtml = false;
-                    if (strAttachFile != "...")
-                        mm.Attachments.Add(new Attachment(strAttachFile));
-                    SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
-                    sc.EnableSsl = true;
-                    sc.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    sc.UseDefaultCredentials = false;
-                    sc.Credentials = new NetworkCredential(strLogin, strPassword);
-                    try
-                    {
-                        sc.Send(mm);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-
-                    }
-                }
-            });
-        }
-
-        public async void SendMailsAsync(ObservableCollection<Common.Recipient> emails)
-        {
-            foreach (Common.Recipient email in emails)
-            {
-                await SendMail(email.Address, email.Name);
-            }
-        }
     }
 }
