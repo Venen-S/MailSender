@@ -13,7 +13,7 @@ namespace MailSender.ViewModel
     {
 
         Recipient _EmailInfo;
-        IDataAccessService _serviceProxy;
+        readonly IDataAccessService _serviceProxy;
         ObservableCollection<Recipient> _Emails;
         private CollectionViewSource _emailView;
 
@@ -59,7 +59,7 @@ namespace MailSender.ViewModel
         //коллекция получателей + фичи для фильта имен
         public ObservableCollection<Recipient> Emails
         {
-            get { return _Emails; }
+            get => _Emails;
             set
             {
                 if (!Set(ref _Emails, value)) return;

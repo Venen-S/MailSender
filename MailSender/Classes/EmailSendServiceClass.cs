@@ -47,7 +47,8 @@ namespace MailSender.Classes
                 mm.Subject = strSubject;
                 mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
                 mm.IsBodyHtml = false;
-                mm.Attachments.Add(new Attachment(strAttachFile));
+                if(strAttachFile!="...")
+                    mm.Attachments.Add(new Attachment(strAttachFile));
                 SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
                 sc.EnableSsl = true;
                 sc.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -74,8 +75,10 @@ namespace MailSender.Classes
             string except = string.Empty;
             foreach (Common.Recipient email in emails)
             {
-                SendMail(email.Address, email.Name,ref flag, ref except);//адрес и нэйм для отправки писем, 
+                Task.Factory.StartNew(() => SendMail(email.Address, email.Name, ref flag, ref except));
+                //адрес и нэйм для отправки писем, 
                 //флаг и строку для проверки как отработано
+                //SendMail(email.Address, email.Name,ref flag, ref except); //мононопоточное выполнение
             }
 
             if (flag == true)//если все норм единожды выскочит окно что все гуд
@@ -91,58 +94,45 @@ namespace MailSender.Classes
             }
         }
 
-        private async Task SendMailAsync(string mail, string name) // асинхронный метод отправки писем
+
+        private Task SendMail(string mail, string name)
         {
-            using (MailMessage mm = new MailMessage(strLogin, mail))
+            return Task.Run(() =>
             {
-                mm.Subject = strSubject;
-                mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
-                mm.IsBodyHtml = false;
-                SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
-                sc.EnableSsl = true;
-                sc.DeliveryMethod = SmtpDeliveryMethod.Network;
-                sc.UseDefaultCredentials = false;
-                sc.Credentials = new NetworkCredential(strLogin, strPassword);
-                try
+
+                using (MailMessage mm = new MailMessage(strLogin, mail))
                 {
-                    await sc.SendMailAsync(mm).ConfigureAwait(false);
+                    (bool, string) cort = (false, string.Empty);
+                    mm.Subject = strSubject;
+                    mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
+                    mm.IsBodyHtml = false;
+                    if (strAttachFile != "...")
+                        mm.Attachments.Add(new Attachment(strAttachFile));
+                    SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
+                    sc.EnableSsl = true;
+                    sc.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    sc.UseDefaultCredentials = false;
+                    sc.Credentials = new NetworkCredential(strLogin, strPassword);
+                    try
+                    {
+                        sc.Send(mm);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Невозможно отправить письмо " + ex.ToString());
-                }
-            }
+            });
         }
 
-        
-
-        //далее идут асинхронные и паралельные методы SendMails
-        public void SendMailsParallel(ObservableCollection<Common.Recipient> emails)
+        public async void SendMailsAsync(ObservableCollection<Common.Recipient> emails)
         {
             foreach (Common.Recipient email in emails)
             {
-                ThreadPool.QueueUserWorkItem(_ => SendMails(emails));
+                await SendMail(email.Address, email.Name);
             }
         }
-
-        public async Task SendParallelAsync(ObservableCollection<Common.Recipient> emails)
-        {
-            var send_task = new List<Task>();
-            foreach (Common.Recipient email in emails)
-            {
-                send_task.Add(SendMailAsync(email.Address, email.Name));
-            }
-            await Task.WhenAll(send_task).ConfigureAwait(false);
-        }
-
-        public async Task SendMailsAsync(ObservableCollection<Common.Recipient> emails)
-        {
-            foreach (Common.Recipient email in emails)
-            {
-                await SendMailAsync(email.Address, email.Name).ConfigureAwait(false);
-            }
-        }
-
-
     }
 }
