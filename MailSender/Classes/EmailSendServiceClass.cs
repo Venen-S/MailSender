@@ -23,7 +23,8 @@ namespace MailSender.Classes
         private string strAttachFile; //путь до файла
         #endregion
 
-        //конструктор класса
+        
+        //конструктор класса для всех
         public EmailSendServiceClass(string sLogin, string sPassword, string sBody, string sSubject,
             string sSmtp, int sPort, string sAttachFile)
         {
@@ -94,5 +95,6 @@ namespace MailSender.Classes
             }
         }
 
+        
     }
 }

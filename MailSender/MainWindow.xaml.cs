@@ -43,10 +43,6 @@ namespace MailSender
             Close();
         }
 
-        private void BtnClock_Click(object sender, RoutedEventArgs e) //переход в планировщик
-        {
-            tbConrol.SelectedItem = tbPlanner;
-        }
 
         private void BtnSend_Click(object sender, RoutedEventArgs e) //планировщик
         {
@@ -106,6 +102,36 @@ namespace MailSender
                 strBody, strSubject, smtpServ, sPort, strAttachFile);
             var locator = (ViewModelLocator)FindResource("Locator");
             emailSender.SendMails(locator.Main.Emails);
+        }
+
+        private void BtnSendOne_Click(object sender, RoutedEventArgs e)
+        {
+            string strAttachFile = tbAttachFileWay.Text; //файл для отправки
+            string strBody = BodyPost.Text;//тело письма
+            string strSubject = SubjectPost.Text;//тема письма
+            string strLogin = cbSenderSelect.Text;//логин
+            string strPassword = cbSenderSelect.SelectedValue.ToString();//пароль
+            string smtpServ = cbSmtpSelect.Text;//смтп сервер
+            string strRecipient = saveEmail.RecipientEmailAddress.ToString();//Берем выделенного получателя для отправки
+            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
+            if (string.IsNullOrEmpty(strLogin))
+            {
+                MessageBox.Show("Выберите отправителя");
+                return;
+            }
+            if (string.IsNullOrEmpty(strPassword))
+            {
+                MessageBox.Show("Укажите пароль отправителя");
+                return;
+            }
+            if (string.IsNullOrEmpty(strBody))
+            {
+                MessageBox.Show("Письмо не заполнено");
+                return;
+            }
+            EmailSendServiceClassToOne emailSenderToOne = new EmailSendServiceClassToOne(strLogin, strPassword,
+                strBody, strSubject, smtpServ, sPort, strAttachFile, strRecipient);
+            emailSenderToOne.SendMail();
         }
 
         private void TabSwitcher_Back(object sender, RoutedEventArgs e)

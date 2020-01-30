@@ -103,6 +103,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\DataValidation.cs" />
     <Compile Include="Classes\Recipients.cs" />
+    <Compile Include="Classes\EmailSendServiceClassToOne.cs" />
     <Compile Include="Services\DataAccessService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
