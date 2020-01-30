@@ -195,7 +195,7 @@
                                     x:Name="btnSend" Foreground="White" BorderBrush="#00707070" Background="#00DDDDDD"
                                 Click="BtnSend_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Запланировать для всех" Width="140"/>
+                                <TextBlock Text="Запланировать для всех" Width="139"/>
                             </StackPanel>
                         </Button>
                         <Button Margin="0,3" Padding="0,5"
@@ -205,8 +205,8 @@
                                 BorderBrush="#00707070" 
                                 Background="#00DDDDDD">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Отправить всем" Foreground="White"/>
-                                <fa:ImageAwesome Height="16" Icon="Send" Margin="6,0,0,0" Foreground="#FF048BFE"/>
+                                <TextBlock Text="Отправить всем" Foreground="White" Width="104"/>
+                                <fa:ImageAwesome Height="16" Icon="Comments" Margin="6,0,0,0" Foreground="#FF048BFE"/>
                             </StackPanel>
                         </Button>
                         <Button Margin="0,3" Padding="0,5"
@@ -217,7 +217,8 @@
                                 Background="#00DDDDDD" 
                                 Height="30">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Отправить одному" Foreground="White" Width="113"/>
+                                <TextBlock Text="Отправить одному" Foreground="White" Width="104"/>
+                                <fa:ImageAwesome Height="16" Icon="Comment" Margin="6,0,0,0" Foreground="#FF048BFE"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -313,10 +314,10 @@
                                 BorderBrush="#00707070" 
                                 Background="#00DDDDDD" 
                                 Margin="841,450,17,5">
-                        <TextBlock Text="Добавить файл" 
-                                       Foreground="White" 
-                                       Width="84" 
-                                       Height="20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Прикрепить файл" Foreground="White"/>
+                            <fa:ImageAwesome Height="16" Icon="File" Margin="6,0,0,0" Foreground="#FF048BFE"/>
+                        </StackPanel>
                     </Button>
                 </Grid>
             </TabItem>
