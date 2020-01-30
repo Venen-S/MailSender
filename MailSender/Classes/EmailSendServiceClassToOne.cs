@@ -16,7 +16,7 @@ namespace MailSender.Classes
         private string strAttachFile; //путь до файла
         private string strRecipient; //получатель
 
-        //конструктор класса для одного
+        //конструктор класса
         public EmailSendServiceClassToOne(string sLogin, string sPassword, string sBody, string sSubject,
             string sSmtp, int sPort, string sAttachFile, string strRecipient)
         {
