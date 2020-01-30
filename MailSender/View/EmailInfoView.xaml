@@ -29,6 +29,7 @@
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
                       Background="#00F0F0F0" BorderBrush="#00688CAF"
                       GridLinesVisibility="None"
+                      ToolTip="Все адресаты занесенные в базу"
                       x:Name="dgEmails"
                       SelectedItem="{Binding EmailInfo}"
                       ItemsSource="{Binding EmailsView}"

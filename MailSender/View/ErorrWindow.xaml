@@ -14,6 +14,7 @@
             VerticalAlignment="Center" 
             Height="175" ScrollViewer.HorizontalScrollBarVisibility="Auto" Padding="5,5,5,12" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Foreground="#FFC51B1B" Background="#FF1E1E1E"/>
         <Button Content="Ok" 
+                ToolTip="Закрыть"
                 Name="btnErorrOk" 
                 Margin="162,0,163,20" 
                 Width="75" HorizontalContentAlignment="Center" 

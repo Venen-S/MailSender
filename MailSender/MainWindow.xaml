@@ -149,8 +149,12 @@
 
                     <TextBlock>Дата:</TextBlock>
                     <Calendar SelectionMode="MultipleRange"
-                                  Margin="10,10,0,0"
-                                  x:Name="cldSchedulDateTimes" HorizontalAlignment="Left" Width="192" Height="175" VerticalAlignment="Top">
+                              Margin="10,10,0,0"
+                              x:Name="cldSchedulDateTimes" 
+                              HorizontalAlignment="Left" 
+                              Width="192" 
+                              Height="175" 
+                              VerticalAlignment="Top">
                         <Calendar.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FFE4EAF0" Offset="0"/>
@@ -172,6 +176,7 @@
                     <DockPanel Margin="76,190,0,0"
                                Background="#00000000" 
                                Height="25" 
+                               ToolTip="Выбор времени отложенного письма"
                                HorizontalAlignment="Left" 
                                Width="112" 
                                VerticalAlignment="Top">
@@ -191,8 +196,13 @@
                                  Foreground="White" Width="90"/>
                     </DockPanel>
                     <StackPanel Margin="10,220,0,0" Width="178" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top">
-                        <Button Margin="0,3" Padding="0,5"
-                                    x:Name="btnSend" Foreground="White" BorderBrush="#00707070" Background="#00DDDDDD"
+                        <Button Margin="0,3" 
+                                ToolTip="Отложенная отправка всем адресатам из списка"
+                                Padding="0,5"
+                                x:Name="btnSend" 
+                                Foreground="White" 
+                                BorderBrush="#00707070" 
+                                Background="#00DDDDDD"
                                 Click="BtnSend_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Запланировать для всех" Width="139"/>
@@ -202,6 +212,7 @@
                                 Click="BtnSendAtOnce_Click"
                                 x:Name="btnSendAtOnce" 
                                 Foreground="#00000000" 
+                                ToolTip="Немедленная отправка всем адресатам из списка"
                                 BorderBrush="#00707070" 
                                 Background="#00DDDDDD">
                             <StackPanel Orientation="Horizontal">
@@ -212,6 +223,7 @@
                         <Button Margin="0,3" Padding="0,5"
                                 Click="BtnSendOne_Click"
                                 x:Name="btnSendOne" 
+                                ToolTip="Немедленная отправка одному адресату из списка. Внимание! Необходимо выделить адресата из вкладки Списки"
                                 Foreground="#00000000"
                                 BorderBrush="#00707070"
                                 Background="#00DDDDDD" 
@@ -281,7 +293,8 @@
                               Margin="207,0,10,0" Height="44" 
                               VerticalAlignment="Top">
                         <TextBox Text="" Foreground="White" 
-                                 SelectionBrush="White" 
+                                 SelectionBrush="White"
+                                 ToolTip="Не обязательно"
                                  Background="#007C1111" 
                                  x:Name="SubjectPost"
                                  BorderBrush="White" Margin="0,0,0,1" CaretBrush="White"/>
@@ -292,6 +305,7 @@
                               Foreground="White" Margin="207,49,10,57">
                         <TextBox AcceptsReturn="True" Text=""
                                  x:Name="BodyPost" 
+                                 ToolTip="Обязательно"
                                  Background="Transparent" 
                                  BorderBrush="White" 
                                  Foreground="White" SelectionBrush="White" CaretBrush="White"/>
@@ -303,6 +317,7 @@
                               Foreground="White">
                         <TextBox Text="..."
                                  x:Name="tbAttachFileWay"
+                                 ToolTip="Путь к файлу"
                                  Margin="106,0,152,0" 
                                  Background="Transparent" 
                                  BorderBrush="#00ABADB3" 
@@ -310,10 +325,11 @@
                         </TextBox>
                     </GroupBox>
                     <Button MouseDoubleClick="FileAttach_MouseDoubleClick"
-                                Foreground="#00000000" 
-                                BorderBrush="#00707070" 
-                                Background="#00DDDDDD" 
-                                Margin="841,450,17,5">
+                            Foreground="#00000000" 
+                            ToolTip="Прикрепить файл к письму. Не более 100Мб. Не прикрепляйте большие файлы это может замедлить работу программы"
+                            BorderBrush="#00707070" 
+                            Background="#00DDDDDD" 
+                            Margin="841,450,17,5">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Прикрепить файл" Foreground="White"/>
                             <fa:ImageAwesome Height="16" Icon="File" Margin="6,0,0,0" Foreground="#FF048BFE"/>

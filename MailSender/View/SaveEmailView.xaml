@@ -60,7 +60,8 @@
         <TextBox Grid.Column="1" 
                  Grid.Row="3" 
                  Text="{Binding EmailInfo.Name,Mode=TwoWay}"
-                 Background="Transparent" 
+                 Background="Transparent"
+                 ToolTip="Имя получателя, произвольно"
                  BorderBrush="#7FFFFFFF" 
                  Foreground="White"/>
         <TextBox Grid.Column="1" 
@@ -69,24 +70,32 @@
                  Text="{Binding EmailInfo.Address,Mode=TwoWay, NotifyOnValidationError=True,
                  ValidatesOnDataErrors=True}" 
                  Validation.Error="TextBox_Error"
+                 ToolTip="Е-майл получателя. Должно быть корректным. Иначе будут ошибки программы"
                  Background="Transparent" 
                  BorderBrush="#7FFFFFFF" 
                  Foreground="White"/>
-        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding EmailInfo.Comment,Mode=TwoWay}"
-                 Background="Transparent" BorderBrush="#7FFFFFFF" Foreground="White"/>
-        <Button Margin="92,11,10,132" Padding="5,3" CommandParameter="{Binding EmailInfo}"
-                    Command="{Binding SaveCommand}"
-                    Content="Сохранить"
+        <TextBox Grid.Column="1" Grid.Row="5" 
+                 Text="{Binding EmailInfo.Comment,Mode=TwoWay}"
+                 Background="Transparent"
+                 ToolTip="Комментарий к адресату"
+                 BorderBrush="#7FFFFFFF" 
+                 Foreground="White"/>
+        <Button Margin="92,11,10,152" Padding="5,3" CommandParameter="{Binding EmailInfo}"
+                Command="{Binding SaveCommand}"
+                Content="Сохранить"
+                ToolTip="Сохранить нового адресата. Внимание! При выделении старого получателя без изменений произойдет дублирование"
                     Background="#00B91F1F" Foreground="White" BorderBrush="#00BF0505" Grid.Column="1" Grid.Row="7"/>
-        <Button Margin="10,11,108,132" Padding="5,3" 
+        <Button Margin="10,11,95,152" Padding="5,3" 
                     CommandParameter="{Binding EmailInfo}"
                     Command="{Binding DeleteCommand}"
                     Content="Удалить"
+                    ToolTip="Удалить адресата"
                     Background="#00B91F1F" Foreground="White" BorderBrush="#00BF0505" Grid.Column="1" Grid.Row="7"/>
-        <Button Grid.Column="1" Margin="45,42,51,103" Grid.Row="7"
+        <Button Grid.Column="1" Margin="45,47,48,117" Grid.Row="7"
                 CommandParameter="{Binding EmailInfo}"
                 Command="{Binding EditCommand}"
                 Content="Редактировать"
+                ToolTip="Редактирование адресата"
                 Background="#00B91F1F" Foreground="White" BorderBrush="#00BF0505"/>
     </Grid>
 </UserControl>

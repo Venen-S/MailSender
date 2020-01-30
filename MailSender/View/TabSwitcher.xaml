@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Button 
                 Click="BackvardButton_Click"
-                ToolTip="Назад"
+                ToolTip="Предыдущая вкладка"
                 Grid.Column="0"
                 Background="#00DDDDDD" 
                 BorderBrush="#00707070" Foreground="White">
@@ -22,7 +22,7 @@
         </Button>
         <Button Grid.Column="1"
                 Click="ForvardButton_Click"
-                ToolTip="Вперед" 
+                ToolTip="Следующая вкладка" 
                 Background="#00DDDDDD" 
                 BorderBrush="#00707070" Foreground="White">
             <fa:ImageAwesome Height="25" Icon="ArrowRight" Foreground="#FF78D77C"></fa:ImageAwesome>
