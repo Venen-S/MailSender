@@ -315,14 +315,13 @@
                               Background="#00000000" 
                               BorderBrush="#00D5DFE5" 
                               Foreground="White">
-                        <TextBox Text="..."
+                        <TextBlock Text="..."
                                  x:Name="tbAttachFileWay"
                                  ToolTip="Путь к файлу"
                                  Margin="106,0,152,0" 
                                  Background="Transparent" 
-                                 BorderBrush="#00ABADB3" 
                                  Foreground="White">
-                        </TextBox>
+                        </TextBlock>
                     </GroupBox>
                     <Button MouseDoubleClick="FileAttach_MouseDoubleClick"
                             Foreground="#00000000" 

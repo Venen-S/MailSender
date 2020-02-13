@@ -44,7 +44,7 @@ namespace MailSender
         }
 
 
-        private void BtnSend_Click(object sender, RoutedEventArgs e) //планировщик
+        private void BtnSend_Click(object sender, RoutedEventArgs e) // запланировать для всех
         {
             string strAttachFile = tbAttachFileWay.Text; //файл для отправки
             string strBody = BodyPost.Text;//тело письма
@@ -74,7 +74,7 @@ namespace MailSender
             
         }
 
-        private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас
+        private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас всем
         {
             string strAttachFile = tbAttachFileWay.Text; //файл для отправки
             string strBody = BodyPost.Text;//тело письма
@@ -104,7 +104,7 @@ namespace MailSender
             emailSender.SendMails(locator.Main.Emails);
         }
 
-        private void BtnSendOne_Click(object sender, RoutedEventArgs e)
+        private void BtnSendOne_Click(object sender, RoutedEventArgs e) //отправить сейчас одному
         {
             string strAttachFile = tbAttachFileWay.Text; //файл для отправки
             string strBody = BodyPost.Text;//тело письма

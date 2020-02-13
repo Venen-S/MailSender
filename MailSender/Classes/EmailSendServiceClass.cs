@@ -90,8 +90,8 @@ namespace MailSender.Classes
             else if (flag == false)//если не норм то обложит матами, но единожды xD
             {
                 View.ErorrWindow erorrWindow = new View.ErorrWindow();
+                erorrWindow.NotSend.Text = "Ошибка при отправке письма \n" + except.ToString();
                 erorrWindow.ShowDialog();
-                MessageBox.Show(except.ToString());
             }
         }
 

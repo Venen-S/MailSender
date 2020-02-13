@@ -56,8 +56,8 @@ namespace MailSender.Classes
                 catch (Exception ex)
                 {
                     View.ErorrWindow erorrWindow = new View.ErorrWindow();
+                    erorrWindow.NotSend.Text = "Ошибка при отправке письма \n"+ex.ToString();
                     erorrWindow.ShowDialog();
-                    MessageBox.Show(ex.ToString());
                 }
             }
         }

@@ -5,22 +5,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:MailSender.View"
              mc:Ignorable="d"
-             Title="ErorrWindow" Height="175" Width="600" HorizontalAlignment="Center" 
-             VerticalAlignment="Center" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Label 
-            x:Name="NotSend"
-            Content="Ошибка при отправке сообщения" 
-            VerticalAlignment="Center" 
-            Height="175" ScrollViewer.HorizontalScrollBarVisibility="Auto" Padding="5,5,5,12" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Foreground="#FFC51B1B" Background="#FF1E1E1E"/>
+             Title="ErorrWindow" HorizontalAlignment="Center" 
+             VerticalAlignment="Center" WindowStyle="None" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="350" Width="500">
+    <Grid Background="#FF1E1E1E">
+        <TextBox 
+            x:Name="NotSend" 
+            Height="Auto" 
+            TextWrapping="WrapWithOverflow"
+            FontSize="20" 
+            Foreground="#FFC51B1B" Margin="10,10,10,45" Background="#FF1E1E1E" BorderBrush="#00ABADB3"/>
         <Button Content="Ok" 
                 ToolTip="Закрыть"
                 Name="btnErorrOk" 
+                IsDefault="True"
                 Margin="162,0,163,20" 
-                Width="75" HorizontalContentAlignment="Center" 
+                Width="75" HorizontalContentAlignment="Center"
                 Click="BtnErorrOk_Click" VerticalAlignment="Bottom" 
                 RenderTransformOrigin="0.505,0.454" Foreground="White" 
                 BorderBrush="Black" Background="#FF1E1E1E"/>
-
     </Grid>
 </Window>

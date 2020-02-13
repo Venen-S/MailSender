@@ -28,6 +28,7 @@ namespace MailSender.View
         private void BtnErorrOk_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            
         }
     }
 }
