@@ -131,7 +131,7 @@ namespace MailSender
             }
             EmailSendServiceClassToOne emailSenderToOne = new EmailSendServiceClassToOne(strLogin, strPassword,
                 strBody, strSubject, smtpServ, sPort, strAttachFile, strRecipient);
-            emailSenderToOne.SendMail();
+            emailSenderToOne.SendMails();
         }
 
         private void TabSwitcher_Back(object sender, RoutedEventArgs e)
