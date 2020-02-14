@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Net;
-using System.Net.Mail;
 using MailSender.Classes;
 using MailSender.ViewModel;
 using Microsoft.Win32;
@@ -43,94 +30,118 @@ namespace MailSender
             Close();
         }
 
-
         private void BtnSend_Click(object sender, RoutedEventArgs e) // запланировать для всех
         {
-            string strAttachFile = tbAttachFileWay.Text; //файл для отправки
-            string strBody = BodyPost.Text;//тело письма
-            string strSubject = SubjectPost.Text;//тема письма
-            string strLogin = cbSenderSelect.Text;//логин
-            string strPassword = cbSenderSelect.SelectedValue.ToString();//пароль
-            string smtpServ = cbSmtpSelect.Text;//смтп сервер
-            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
             SchedulerClass sc = new SchedulerClass();
             TimeSpan tsSendTime = sc.GetSendTime(TimePicker.Text);
-            if (tsSendTime==new TimeSpan())
-            {
-                MessageBox.Show("Некорректный формат даты");
-                return;
-            }
-            DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate 
-                ?? DateTime.Today).Add(tsSendTime);
-            if(dtSendDateTime<DateTime.Now)
-            {
-                MessageBox.Show("Дата и время не могут быть раньше, чем настоящее время");
-                return;
-            }
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword,
-                strBody, strSubject, smtpServ, sPort, strAttachFile);
-            var locator = (ViewModelLocator)FindResource("Locator");
-            sc.SendEmails(emailSender, locator.Main.Emails);
-            
-        }
-
-        private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас всем
-        {
-            string strAttachFile = tbAttachFileWay.Text; //файл для отправки
-            string strBody = BodyPost.Text;//тело письма
-            string strSubject = SubjectPost.Text;//тема письма
-            string strLogin = cbSenderSelect.Text;//логин
-            string strPassword = cbSenderSelect.SelectedValue.ToString();//пароль
-            string smtpServ = cbSmtpSelect.Text;//смтп сервер
-            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
-            if(string.IsNullOrEmpty(strLogin))
+            if (string.IsNullOrEmpty(cbSenderSelect.Text))
             {
                 MessageBox.Show("Выберите отправителя");
                 return;
             }
-            if(string.IsNullOrEmpty(strPassword))
+            if (string.IsNullOrEmpty(cbSmtpSelect.Text))
             {
-                MessageBox.Show("Укажите пароль отправителя");
+                MessageBox.Show("Укажите Smtp сервер");
                 return;
             }
-            if(string.IsNullOrEmpty(strBody))
+            if (string.IsNullOrEmpty(BodyPost.Text))
             {
                 MessageBox.Show("Письмо не заполнено");
                 return;
             }
-            EmailSendServiceClass emailSender=new EmailSendServiceClass(strLogin, strPassword,
-                strBody, strSubject, smtpServ, sPort, strAttachFile);
+            if (tsSendTime == new TimeSpan())
+            {
+                MessageBox.Show("Некорректный формат даты");
+                return;
+            }
+            DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate
+                ?? DateTime.Today).Add(tsSendTime);
+            if (dtSendDateTime < DateTime.Now)
+            {
+                MessageBox.Show("Дата и время не могут быть раньше, чем настоящее время");
+                return;
+            }
+            var _field = new Fields()
+            {
+                AttachFile = tbAttachFileWay.Text,
+                Body = BodyPost.Text,
+                Subject = SubjectPost.Text,
+                Login = cbSenderSelect.Text,
+                Password = cbSenderSelect.SelectedValue.ToString(),
+                Smtp = cbSmtpSelect.Text,
+                SmtpPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString())
+            };
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(_field);
+            var locator = (ViewModelLocator)FindResource("Locator");
+            sc.SendEmails(emailSender, locator.Main.Emails);
+        }
+
+        private void BtnSendAtOnce_Click(object sender, RoutedEventArgs e) //отправить сейчас всем
+        {
+            if (string.IsNullOrEmpty(cbSenderSelect.Text))
+            {
+                MessageBox.Show("Выберите отправителя");
+                return;
+            }
+            if (string.IsNullOrEmpty(cbSmtpSelect.Text))
+            {
+                MessageBox.Show("Укажите Smtp сервер");
+                return;
+            }
+            if (string.IsNullOrEmpty(BodyPost.Text))
+            {
+                MessageBox.Show("Письмо не заполнено");
+                return;
+            }
+            var _field = new Fields()
+            {
+                AttachFile = tbAttachFileWay.Text,
+                Body = BodyPost.Text,
+                Subject = SubjectPost.Text,
+                Login = cbSenderSelect.Text,
+                Password = cbSenderSelect.SelectedValue.ToString(),
+                Smtp = cbSmtpSelect.Text,
+                SmtpPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString())
+            };
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(_field);
             var locator = (ViewModelLocator)FindResource("Locator");
             emailSender.SendMails(locator.Main.Emails);
         }
 
         private void BtnSendOne_Click(object sender, RoutedEventArgs e) //отправить сейчас одному
         {
-            string strAttachFile = tbAttachFileWay.Text; //файл для отправки
-            string strBody = BodyPost.Text;//тело письма
-            string strSubject = SubjectPost.Text;//тема письма
-            string strLogin = cbSenderSelect.Text;//логин
-            string strPassword = cbSenderSelect.SelectedValue.ToString();//пароль
-            string smtpServ = cbSmtpSelect.Text;//смтп сервер
-            string strRecipient = saveEmail.RecipientEmailAddress.ToString();//Берем выделенного получателя для отправки
-            int sPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString());//порт смпт сервера
-            if (string.IsNullOrEmpty(strLogin))
+            if (string.IsNullOrEmpty(cbSenderSelect.Text))
             {
                 MessageBox.Show("Выберите отправителя");
                 return;
             }
-            if (string.IsNullOrEmpty(strPassword))
+            if (string.IsNullOrEmpty(cbSmtpSelect.Text))
             {
-                MessageBox.Show("Укажите пароль отправителя");
+                MessageBox.Show("Укажите Smtp сервер");
                 return;
             }
-            if (string.IsNullOrEmpty(strBody))
+            if (string.IsNullOrEmpty(BodyPost.Text))
             {
                 MessageBox.Show("Письмо не заполнено");
                 return;
             }
-            EmailSendServiceClassToOne emailSenderToOne = new EmailSendServiceClassToOne(strLogin, strPassword,
-                strBody, strSubject, smtpServ, sPort, strAttachFile, strRecipient);
+            if(string.IsNullOrEmpty(saveEmail.RecipientEmailAddress.ToString()))
+            {
+                MessageBox.Show("Получатель не выбран");
+                return;
+            }
+            var _field = new Fields()
+            {
+                AttachFile = tbAttachFileWay.Text,
+                Body = BodyPost.Text,
+                Subject = SubjectPost.Text,
+                Login = cbSenderSelect.Text,
+                Password = cbSenderSelect.SelectedValue.ToString(),
+                Smtp = cbSmtpSelect.Text,
+                Recipient = saveEmail.RecipientEmailAddress.ToString(),
+                SmtpPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString())
+            };
+            EmailSendServiceClassToOne emailSenderToOne = new EmailSendServiceClassToOne(_field);
             emailSenderToOne.SendMails();
         }
 
@@ -146,7 +157,7 @@ namespace MailSender
             tbConrol.SelectedIndex++;
         }
 
-        private void FileAttach_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void FileAttach_MouseDoubleClick(object sender, MouseButtonEventArgs e)//Прикрепить файл к рассылке
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.ShowDialog();
@@ -163,7 +174,7 @@ namespace MailSender
             }
         }
 
-        private void btnClearThePath_Click(object sender, RoutedEventArgs e)
+        private void btnClearThePath_Click(object sender, RoutedEventArgs e)//Очистить путь к файлу
         {
             tbAttachFileWay.Text = ". . .";
         }

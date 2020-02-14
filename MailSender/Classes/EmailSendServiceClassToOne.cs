@@ -24,17 +24,16 @@ namespace MailSender.Classes
         private string strRecipient; //получатель
 
         //конструктор класса
-        public EmailSendServiceClassToOne(string sLogin, string sPassword, string sBody, string sSubject,
-            string sSmtp, int sPort, string sAttachFile, string strRecipient)
+        public EmailSendServiceClassToOne(Fields field)
         {
-            strLogin = sLogin;
-            strPassword = sPassword;
-            strBody = sBody;
-            strSubject = sSubject;
-            iSmtpPort = sPort;
-            strSmtp = sSmtp;
-            strAttachFile = sAttachFile;
-            this.strRecipient = strRecipient;
+            strLogin = field.Login;
+            strPassword = field.Password;
+            strSmtp = field.Smtp;
+            iSmtpPort = field.SmtpPort;
+            strBody = field.Body;
+            strSubject = field.Subject;
+            strAttachFile = field.AttachFile;
+            strRecipient = field.Recipient;
         }
 
         /// <summary>

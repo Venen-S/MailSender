@@ -23,18 +23,17 @@ namespace MailSender.Classes
         private string strAttachFile; //путь до файла
         #endregion
 
-        
-        //конструктор класса для всех
-        public EmailSendServiceClass(string sLogin, string sPassword, string sBody, string sSubject,
-            string sSmtp, int sPort, string sAttachFile)
+
+        //конструктор класса для всех 
+        public EmailSendServiceClass(Fields field)
         {
-            strLogin = sLogin;
-            strPassword = sPassword;
-            strBody = sBody;
-            strSubject = sSubject;
-            iSmtpPort = sPort;
-            strSmtp = sSmtp;
-            strAttachFile = sAttachFile;
+            strLogin = field.Login;
+            strPassword = field.Password;
+            strSmtp = field.Smtp;
+            iSmtpPort = field.SmtpPort;
+            strBody = field.Body;
+            strSubject = field.Subject;
+            strAttachFile = field.AttachFile;
         }
 
         private (bool,string) SendMail(string mail, string name, ref bool flag, ref string except)
