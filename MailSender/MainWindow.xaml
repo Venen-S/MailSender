@@ -7,7 +7,9 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MailSender.View"
         mc:Ignorable="d"
-        Title="MailSender" 
+        Title="Mail Sender" 
+        MinHeight="600"
+        MinWidth="980"
         Height="600" 
         Width="1000">
     <Window.Background>
@@ -117,7 +119,7 @@
                             <GridSplitter Grid.Column="1" HorizontalAlignment="Left"
                                           Width="3" Background="Transparent"/>
                             <local:EmailInfoView Grid.Column="0" x:Name="emailInfo"/>
-                            <local:SaveEmailView Grid.Column="1" Margin="10,71,10,122" x:Name="saveEmail"/>
+                            <local:SaveEmailView Grid.Column="1" Margin="19,71,19,0" x:Name="saveEmail" VerticalAlignment="Top"/>
                             <!--<DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
                                       Background="#00F0F0F0" BorderBrush="#00688CAF"
                                       x:Name="dgEmails"
@@ -311,32 +313,43 @@
                                  Foreground="White" SelectionBrush="White" CaretBrush="White"/>
                     </GroupBox>
                     <GroupBox Header="Прикрепить файл" 
-                              Margin="207,436,10,0" 
+                              Margin="207,0,10,0" 
                               Background="#00000000" 
                               BorderBrush="#00D5DFE5" 
-                              Foreground="White">
-                        <TextBlock Text="..."
+                              Foreground="White" Height="57" VerticalAlignment="Bottom">
+                        <Grid>
+                            <TextBlock Text=". . ."
+                                 HorizontalAlignment="Left"
                                  x:Name="tbAttachFileWay"
-                                 ToolTip="Путь к файлу"
-                                 Margin="106,0,152,0" 
+                                 ToolTip="Путь к файлу" 
                                  Background="Transparent" 
-                                 Foreground="White">
-                        </TextBlock>
+                                 Foreground="White" Width="468" Height="24" VerticalAlignment="Top" Margin="115,10,0,0">
+                            </TextBlock>
+                            <Button x:Name="btnClearThePath"
+                                    Click="btnClearThePath_Click"
+                                    Foreground="#00000000"
+                                    ToolTip="Очистить путь до файла"
+                                    BorderBrush="#00707070" 
+                                    Background="#00DDDDDD" HorizontalAlignment="Left" Width="104" Height="34" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Очистить путь"
+                                            Foreground="White" Width="84"/>
+                                </StackPanel>
+                            </Button>
+                            <Button MouseDoubleClick="FileAttach_MouseDoubleClick"
+                                    Foreground="#00000000" 
+                                    ToolTip="Прикрепить файл к письму. Не более 100Мб. Не прикрепляйте большие файлы это может замедлить работу программы"
+                                    BorderBrush="#00707070" 
+                                    Background="#00DDDDDD" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="143">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Прикрепить файл" Foreground="White"/>
+                                    <fa:ImageAwesome Height="16" Icon="File" Margin="6,0,0,0" Foreground="#FF048BFE"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                     </GroupBox>
-                    <Button MouseDoubleClick="FileAttach_MouseDoubleClick"
-                            Foreground="#00000000" 
-                            ToolTip="Прикрепить файл к письму. Не более 100Мб. Не прикрепляйте большие файлы это может замедлить работу программы"
-                            BorderBrush="#00707070" 
-                            Background="#00DDDDDD" 
-                            Margin="841,450,17,5">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Прикрепить файл" Foreground="White"/>
-                            <fa:ImageAwesome Height="16" Icon="File" Margin="6,0,0,0" Foreground="#FF048BFE"/>
-                        </StackPanel>
-                    </Button>
                 </Grid>
             </TabItem>
-            
         </TabControl>
     </DockPanel>
 </Window>

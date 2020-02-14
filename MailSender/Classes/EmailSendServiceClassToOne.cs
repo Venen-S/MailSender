@@ -48,7 +48,7 @@ namespace MailSender.Classes
                 mm.Subject = strSubject;
                 mm.Body = strBody + "\nПисьмо от " + DateTime.Now;
                 mm.IsBodyHtml = false;
-                if (strAttachFile != "...")
+                if (strAttachFile != ". . .")
                     mm.Attachments.Add(new Attachment(strAttachFile));
                 SmtpClient sc = new SmtpClient(strSmtp, iSmtpPort);
                 sc.EnableSsl = true;

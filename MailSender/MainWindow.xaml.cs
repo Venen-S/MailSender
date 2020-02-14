@@ -162,5 +162,10 @@ namespace MailSender
                 tbAttachFileWay.Text = ofd.FileName.ToString();
             }
         }
+
+        private void btnClearThePath_Click(object sender, RoutedEventArgs e)
+        {
+            tbAttachFileWay.Text = ". . .";
+        }
     }
 }
