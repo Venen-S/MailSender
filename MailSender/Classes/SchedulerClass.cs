@@ -20,6 +20,7 @@ namespace MailSender.Classes
 
         DispatcherTimer timer = new DispatcherTimer(); //таймер
         EmailSendServiceClass emailSender;             //экземпл. кл. отвечающего за отправку
+        EmailSendServiceClassToOne emailSenderToOne;   //экземпл. кл. отвечающего за отправку одному
         DateTime dtSend;                               //дата и время отправки
         ObservableCollection<Common.Recipient> emails; //коллекция адресов
 
@@ -53,18 +54,34 @@ namespace MailSender.Classes
             timer.Start();
         }
 
+        public void SendEmails(EmailSendServiceClassToOne emailSendServiceClassToOne)
+        {
+            this.emailSenderToOne = emailSendServiceClassToOne;
+            timer.Tick += Timer_Tick_One;
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
+        }
+
+        private void Timer_Tick_One(object sender, EventArgs e)
+        {
+            if(dtSend.ToString()==DateTime.Now.ToString())
+            {
+                emailSenderToOne.SendMails();
+                timer.Stop();
+            }
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (dtSend.ToString() == DateTime.Now.ToString())
             {
                 emailSender.SendMails(emails);
                 timer.Stop();
-                MessageBox.Show("Письма отправлены");
             }
         }
 
 
-        //тупо для unit теста, черт ногу сломит, какая та магия
+        //тупо для unit теста, бесполезная вещь
         //Dictionary<DateTime, string> dicDates = new Dictionary<DateTime, string>();
         //public Dictionary<DateTime,string> DatesEmailTexts
         //{

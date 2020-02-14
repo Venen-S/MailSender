@@ -149,8 +149,6 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock>Дата:</TextBlock>
                     <Calendar SelectionMode="MultipleRange"
                               Margin="10,10,0,0"
                               x:Name="cldSchedulDateTimes" 
@@ -209,6 +207,18 @@
                                 Click="BtnSend_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Запланировать для всех" Width="139"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="0,3"
+                                ToolTip="Отложенная отправка одному"
+                                Padding="0,5"
+                                x:Name="btnSendScheduledOne"
+                                Foreground="White"
+                                BorderBrush="#00707070" 
+                                Background="#00DDDDDD"
+                                Click="BtnSendScheduledOne_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Запланировать для одного" Width="153"/>
                             </StackPanel>
                         </Button>
                         <Button Margin="0,3" Padding="0,5"

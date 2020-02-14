@@ -145,6 +145,57 @@ namespace MailSender
             emailSenderToOne.SendMails();
         }
 
+        private void BtnSendScheduledOne_Click(object sender, RoutedEventArgs e)//отложенная отправка для одного
+        {
+            SchedulerClass sc = new SchedulerClass();
+            TimeSpan tsSendTime = sc.GetSendTime(TimePicker.Text);
+            if (string.IsNullOrEmpty(cbSenderSelect.Text))
+            {
+                MessageBox.Show("Выберите отправителя");
+                return;
+            }
+            if (string.IsNullOrEmpty(cbSmtpSelect.Text))
+            {
+                MessageBox.Show("Укажите Smtp сервер");
+                return;
+            }
+            if (string.IsNullOrEmpty(BodyPost.Text))
+            {
+                MessageBox.Show("Письмо не заполнено");
+                return;
+            }
+            if (string.IsNullOrEmpty(saveEmail.RecipientEmailAddress.ToString()))
+            {
+                MessageBox.Show("Получатель не выбран");
+                return;
+            }
+            if (tsSendTime == new TimeSpan())
+            {
+                MessageBox.Show("Некорректный формат даты");
+                return;
+            }
+            DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate
+                ?? DateTime.Today).Add(tsSendTime);
+            if (dtSendDateTime < DateTime.Now)
+            {
+                MessageBox.Show("Дата и время не могут быть раньше, чем настоящее время");
+                return;
+            }
+            var _field = new Fields()
+            {
+                AttachFile = tbAttachFileWay.Text,
+                Body = BodyPost.Text,
+                Subject = SubjectPost.Text,
+                Login = cbSenderSelect.Text,
+                Password = cbSenderSelect.SelectedValue.ToString(),
+                Smtp = cbSmtpSelect.Text,
+                Recipient = saveEmail.RecipientEmailAddress.ToString(),
+                SmtpPort = int.Parse(((KeyValuePair<string, int>)cbSmtpSelect.SelectedItem).Value.ToString())
+            };
+            EmailSendServiceClassToOne emailSenderToOne = new EmailSendServiceClassToOne(_field);
+            sc.SendEmails(emailSenderToOne);
+            MessageBox.Show("Отложенная отправка создана. \nДождитесь подтверждения о завершении работы программы");
+        }
         private void TabSwitcher_Back(object sender, RoutedEventArgs e)
         {
             if (tbConrol.SelectedIndex == 0) return;
