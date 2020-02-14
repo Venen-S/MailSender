@@ -27,5 +27,17 @@ namespace MailSender.View
 
         private void BackvardButton_Click(object sender, RoutedEventArgs e) => Back?.Invoke(this, new RoutedEventArgs());
         private void ForvardButton_Click(object sender, RoutedEventArgs e) => Forward?.Invoke(this, new RoutedEventArgs());
+
+        private void Button_KeyDown_Back(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+                Back?.Invoke(this, new RoutedEventArgs());
+        }
+
+        private void Button_KeyDown_Forward(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right)
+                Forward?.Invoke(this, new RoutedEventArgs());
+        }
     }
 }
